@@ -1,17 +1,9 @@
 <template>
   <div id="editWrap">
-    <div class="form-group">
-      <label>商品名</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>定価</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>販売価格</label>
-      <input type="text">
-    </div>
+    <itemName/>
+    <listPrice/>
+    <sellPrice/>
+
     <div class="form-group">
       <label>ブランド</label>
       <input type="text">
@@ -59,35 +51,28 @@
   </div>
 </template>
 
-商品画像 N枚(最低1枚, 余裕ができたらN枚)
-
-
 <script>
+import itemName from '@/components/modules/itemName.vue'
+import listPrice from '@/components/modules/listPrice.vue'
+import sellPrice from '@/components/modules/sellPrice.vue'
+
 export default {
   name: "Edit",
   data() {
     return {
       msg: "あああ"
     };
+  },
+  components: {
+    itemName,
+    listPrice,
+    sellPrice,
+    
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>
