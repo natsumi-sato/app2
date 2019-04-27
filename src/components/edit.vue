@@ -3,23 +3,11 @@
     <itemName/>
     <listPrice/>
     <sellPrice/>
-
-    <div class="form-group">
-      <label>ブランド</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>カテゴリ</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>カラー</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>容量</label>
-      <input type="text">
-    </div>
+    <brand/>
+    <category/>
+    <color/>
+    <capacity/>
+    <postage/>
     <div class="form-group">
       <label>送料</label>
       <input type="text">
@@ -55,6 +43,11 @@
 import itemName from '@/components/modules/itemName.vue'
 import listPrice from '@/components/modules/listPrice.vue'
 import sellPrice from '@/components/modules/sellPrice.vue'
+import brand from '@/components/modules/brand.vue'
+import category from '@/components/modules/category.vue'
+import color from '@/components/modules/color.vue'
+import capacity from '@/components/modules/capacity.vue'
+import postage from '@/components/modules/postage.vue'
 
 export default {
   name: "Edit",
@@ -67,7 +60,12 @@ export default {
     itemName,
     listPrice,
     sellPrice,
-    
+    brand,
+    category,
+    color,
+    capacity,
+    postage,
+
   }
 };
 </script>
