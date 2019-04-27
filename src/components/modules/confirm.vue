@@ -1,6 +1,6 @@
 <template>
   <div class="form-group">
-    <button v-on:click="buttonAction">{{ button }}</button>
+    <router-link to="/confirm" tag="button">{{ button }}</router-link>
   </div>
 </template>
 
