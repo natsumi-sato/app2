@@ -6,30 +6,30 @@
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 //import store from '@/store/index.js'
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
   name: "itemName",
   data() {
     return {
-      title: "商品名",
+      title: "商品名"
     };
   },
   computed: {
     itemName: {
-      get () {
-        return this.$store.state.itemName
+      get() {
+        return this.$store.state.itemName;
       },
-      set (value) {
-        this.$store.commit('updateItemName', value)
+      set(value) {
+        this.$store.commit("updateItemName", value);
       }
     },
-    ...mapGetters('Textarea', {
-      'error': 'getError'
+    ...mapGetters("Textarea", {
+      error: "getError"
     })
-   }
+  }
 };
 </script>
 

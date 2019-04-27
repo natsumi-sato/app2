@@ -18,9 +18,12 @@ const Edit = {
 const String = {
     namespaced: true,//名前空間を有効にする
     getters: {
-    getString (state, getters, rootState) {
-        return rootState.itemName
-    }
+        getStringitemName (state, getters, rootState) {
+            return rootState.itemName
+        },
+        getStringlistPrice (state, getters, rootState) {
+            return rootState.listPrice
+        },
     }
 }
 
@@ -28,7 +31,9 @@ export default new Vuex.Store({
     state: {
         stepCount: 0,
         itemName: "",
-        errorFlag: false//trueなら通過
+        errorFlag: false, //trueなら通過
+        listPrice: "",
+
       },
       mutations: {
         setStepCount (state) {
@@ -42,6 +47,14 @@ export default new Vuex.Store({
           } else {
             state.errorFlag = false
           }
+          },
+        updateListPrice (state, value) {
+            state.listPrice = value
+            if (state.listPrice) {
+                state.errorFlag = true
+            } else {
+                state.errorFlag = false
+            }
         }
       },
   modules: {

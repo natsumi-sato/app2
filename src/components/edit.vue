@@ -15,7 +15,8 @@
     <seibun/>
     <mainImage/>
     <confirm/>
-    <p>{{ itemName }}</p>
+    <h1>{{ itemName }}</h1>
+    <p>{{ listPrice }}</p>
   </div>
 </template>
 
@@ -63,7 +64,8 @@ export default {
     confirm,
   },
   computed: mapGetters('String', {
-    'itemName': 'getString'
+    'itemName': 'getStringitemName',
+    'listPrice': 'getStringlistPrice'
   })
 };
 </script>

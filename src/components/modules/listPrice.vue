@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input type="text">
+      <input type="text" v-model="listPrice">
     </div>
 </template>
 
@@ -12,6 +12,16 @@ export default {
     return {
       title: '定価'
     }
+  },
+  computed: {
+    listPrice: {
+      get() {
+        return this.$store.state.listPrice;
+      },
+      set(value) {
+        this.$store.commit("updateListPrice", value);
+      }
+    },
   }
 }
 </script>
