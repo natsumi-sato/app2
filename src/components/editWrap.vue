@@ -15,6 +15,7 @@
     <seibun/>
     <mainImage/>
     <confirm/>
+    
   </div>
 </template>
 
