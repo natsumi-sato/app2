@@ -15,6 +15,7 @@
     <seibun/>
     <mainImage/>
     <confirm/>
+    <p>{{ itemName }}</p>
   </div>
 </template>
 
@@ -35,11 +36,13 @@ import seibun from '@/components/modules/seibun.vue'
 import mainImage from '@/components/modules/mainImage.vue'
 import confirm from '@/components/modules/confirm.vue'
 
+import { mapGetters } from 'vuex'
+
 export default {
   name: "editWrap",
   data() {
     return {
-      msg: "あああ"
+      msg: "あああ",
     };
   },
   components: {
@@ -58,7 +61,10 @@ export default {
     seibun,
     mainImage,
     confirm,
-  }
+  },
+  computed: mapGetters('String', {
+    'itemName': 'getString'
+  })
 };
 </script>
 
