@@ -8,34 +8,12 @@
     <color/>
     <capacity/>
     <postage/>
-    <div class="form-group">
-      <label>送料</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>ポイント</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>並行輸入品フラグ</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>在庫数</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>商品詳細</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>成分</label>
-      <input type="text">
-    </div>
-    <div class="form-group">
-      <label>メイン画像</label>
-      <input type="file">
-    </div>
+    <point/>
+    <importFlag/>
+    <stock/>
+    <detail/>
+    <seibun/>
+    <mainImage/>
   </div>
 </template>
 
@@ -48,6 +26,12 @@ import category from '@/components/modules/category.vue'
 import color from '@/components/modules/color.vue'
 import capacity from '@/components/modules/capacity.vue'
 import postage from '@/components/modules/postage.vue'
+import point from '@/components/modules/point.vue'
+import importFlag from '@/components/modules/importFlag.vue'
+import stock from '@/components/modules/stock.vue'
+import detail from '@/components/modules/detail.vue'
+import seibun from '@/components/modules/seibun.vue'
+import mainImage from '@/components/modules/mainImage.vue'
 
 export default {
   name: "Edit",
@@ -65,7 +49,12 @@ export default {
     color,
     capacity,
     postage,
-
+    point,
+    importFlag,
+    stock,
+    detail,
+    seibun,
+    mainImage,
   }
 };
 </script>

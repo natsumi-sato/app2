@@ -1,16 +1,16 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input type="text">
+      <input type="file">
     </div>
 </template>
 
 <script>
 export default {
-  name: 'itemName',
+  name: 'mainImage',
   data () {
     return {
-      title: '商品名'
+      title: 'メイン画像'
     }
   }
 }

@@ -7,10 +7,10 @@
 
 <script>
 export default {
-  name: 'itemName',
+  name: 'detail',
   data () {
     return {
-      title: '商品名'
+      title: '商品詳細'
     }
   }
 }

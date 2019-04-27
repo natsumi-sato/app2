@@ -7,10 +7,10 @@
 
 <script>
 export default {
-  name: 'itemName',
+  name: 'importFlag',
   data () {
     return {
-      title: '商品名'
+      title: '並行輸入品フラグ'
     }
   }
 }

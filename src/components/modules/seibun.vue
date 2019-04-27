@@ -7,10 +7,10 @@
 
 <script>
 export default {
-  name: 'itemName',
+  name: 'seibun',
   data () {
     return {
-      title: '商品名'
+      title: '成分'
     }
   }
 }

@@ -7,10 +7,10 @@
 
 <script>
 export default {
-  name: 'itemName',
+  name: 'stock',
   data () {
     return {
-      title: '商品名'
+      title: '在庫数'
     }
   }
 }
