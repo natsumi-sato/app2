@@ -14,6 +14,7 @@
     <detail/>
     <seibun/>
     <mainImage/>
+    <confirm/>
   </div>
 </template>
 
@@ -32,6 +33,7 @@ import stock from '@/components/modules/stock.vue'
 import detail from '@/components/modules/detail.vue'
 import seibun from '@/components/modules/seibun.vue'
 import mainImage from '@/components/modules/mainImage.vue'
+import confirm from '@/components/modules/confirm.vue'
 
 export default {
   name: "Edit",
@@ -55,6 +57,7 @@ export default {
     detail,
     seibun,
     mainImage,
+    confirm,
   }
 };
 </script>
