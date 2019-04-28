@@ -14,7 +14,6 @@
     <div class="detail">{{ sharedState.state.property.detail }}</div>
     <div class="seibun">{{ sharedState.state.property.seibun }}</div>
     <div class="mainImage">{{ sharedState.state.property.mainImage }}</div>
-    <div class="confirm">{{ sharedState.state.property.confirm }}</div>
   </div>
 </template>
 

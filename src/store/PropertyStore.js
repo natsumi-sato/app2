@@ -4,8 +4,19 @@ var PropertyStore = {
   state: {
     property: {
       type: '1',
-      nickname: '',
       itemName: '',
+      listPrice: '',
+      sellPrice: '',
+      brand: '',
+      category: '',
+      color: '',
+      postage: '',
+      point: '',
+      importFlag: '',
+      stock: '',
+      detail: '',
+      seibun: '',
+      mainImage: '',
     }
   },
   validate () {
