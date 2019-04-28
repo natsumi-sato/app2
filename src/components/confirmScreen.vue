@@ -1,5 +1,5 @@
 <template>
-  <div id="comfirmWrap">
+  <div class="comfirmWrap">
     <p>{{ msg }}</p>
     <div class="itemName">{{ sharedState.state.property.itemName }}</div>
     <div class="listPrice">{{ sharedState.state.property.listPrice }}</div>
@@ -13,13 +13,14 @@
     <div class="stock">{{ sharedState.state.property.stock }}</div>
     <div class="detail">{{ sharedState.state.property.detail }}</div>
     <div class="seibun">{{ sharedState.state.property.seibun }}</div>
-    <img :src="image">
+    <img v-show="uploadedImage" :src="uploadedImage" />
   </div>
 </template>
 
 <script>
 import store from '@/store/index.js'
 import PropertyStore from '@/store/PropertyStore.js'
+import { mapState } from "vuex"
 
 export default {
   name: "confirmScreen",
@@ -28,15 +29,25 @@ export default {
       msg: "確認画面テスト",
       privateState: {},
       sharedState: PropertyStore,
-      image: ''
     };
   },
   components: {
   },
+  computed: {
+    ...mapState(['uploadedImage'])
+  },
+  methods: {
+    testtt(e) {
+      console.log(e)
+      this.$store.dispatch("onFileChange", e)
+    },
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style scoped lang="sass">
+.comfirmWrap
+  img 
+    max-width: 100px
 </style>
