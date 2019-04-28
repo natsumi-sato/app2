@@ -6,7 +6,6 @@
     <brand/>
     <category/>
     <color/>
-    <capacity/>
     <postage/>
     <point/>
     <importFlag/>
@@ -15,8 +14,9 @@
     <seibun/>
     <mainImage/>
     <confirm/>
-    <h1>{{ itemName }}</h1>
-    <p>{{ listPrice }}</p>
+    <div class="nickname">{{ sharedState.state.property.nickname }}</div>
+    <input class="input" v-model="sharedState.state.property.nickname" placeholder="NICKNAMEを入力してください。">
+    <button class="button" v-on:click="validate">START</button>
   </div>
 </template>
 
@@ -39,11 +39,15 @@ import confirm from '@/components/modules/confirm.vue'
 
 import { mapGetters } from 'vuex'
 
+import PropertyStore from '@/store/PropertyStore.js'
+
 export default {
   name: "editWrap",
   data() {
     return {
       msg: "あああ",
+      privateState: {},
+      sharedState: PropertyStore
     };
   },
   components: {
@@ -63,10 +67,20 @@ export default {
     mainImage,
     confirm,
   },
-  computed: mapGetters('String', {
-    'itemName': 'getStringitemName',
-    'listPrice': 'getStringlistPrice'
-  })
+  methods: {
+    validate: function (event) {
+      console.log(this.$el)
+      var valid = false
+      try {
+        valid = this.$data.sharedState.validate()
+        if (valid) {
+          this.$router.push('/confirm')
+        }
+      } catch (e) {
+        alert(e.message)
+      }
+    }
+  }
 };
 </script>
 

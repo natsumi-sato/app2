@@ -1,35 +1,26 @@
 <template>
   <div class="form-group">
     <label>{{title}}</label>
-    <input type="text" v-model="itemName">
+    <!--<input type="text" v-model="title">-->
+    <input class="input" v-model="sharedState.state.property.itemName">
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 //import store from '@/store/index.js'
-import { mapGetters } from "vuex";
+import PropertyStore from '@/store/PropertyStore.js'
 
 export default {
   name: "itemName",
   data() {
     return {
-      title: "商品名"
+      title: "商品名",
+      privateState: {},
+      sharedState: PropertyStore
     };
   },
-  computed: {
-    itemName: {
-      get() {
-        return this.$store.state.itemName;
-      },
-      set(value) {
-        this.$store.commit("updateItemName", value);
-      }
-    },
-    ...mapGetters("Textarea", {
-      error: "getError"
-    })
-  }
+  
 };
 </script>
 
