@@ -1,16 +1,20 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input type="text">
+      <input class="input" v-model="sharedState.state.property.stock">
     </div>
 </template>
 
 <script>
+import PropertyStore from '@/store/PropertyStore.js'
+
 export default {
   name: 'stock',
   data () {
     return {
-      title: '在庫数'
+      title: '在庫数',
+      privateState: {},
+      sharedState: PropertyStore
     }
   }
 }

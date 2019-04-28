@@ -1,7 +1,6 @@
 <template>
   <div id="comfirmWrap">
     <p>{{ msg }}</p>
-    <div class="nickname">{{ sharedState.state.property.nickname }}</div>
     <div class="itemName">{{ sharedState.state.property.itemName }}</div>
     <div class="listPrice">{{ sharedState.state.property.listPrice }}</div>
     <div class="sellPrice">{{ sharedState.state.property.sellPrice }}</div>

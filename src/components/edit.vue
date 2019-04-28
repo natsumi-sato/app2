@@ -14,9 +14,6 @@
     <seibun/>
     <mainImage/>
     <confirm/>
-    <div class="nickname">{{ sharedState.state.property.nickname }}</div>
-    <input class="input" v-model="sharedState.state.property.nickname" placeholder="NICKNAMEを入力してください。">
-    <button class="button" v-on:click="validate">START</button>
   </div>
 </template>
 
