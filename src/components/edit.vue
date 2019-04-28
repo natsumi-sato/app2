@@ -14,6 +14,10 @@
     <seibun/>
     <mainImage/>
     <subImage1/>
+    <subImage2/>
+    <subImage3/>
+    <subImage4/>
+    <subImage5/>
     <confirm/>
   </div>
 </template>
@@ -34,6 +38,10 @@ import detail from '@/components/modules/detail.vue'
 import seibun from '@/components/modules/seibun.vue'
 import mainImage from '@/components/modules/mainImage.vue'
 import subImage1 from '@/components/modules/subImage1.vue'
+import subImage2 from '@/components/modules/subImage2.vue'
+import subImage3 from '@/components/modules/subImage3.vue'
+import subImage4 from '@/components/modules/subImage4.vue'
+import subImage5 from '@/components/modules/subImage5.vue'
 import confirm from '@/components/modules/confirm.vue'
 
 import { mapGetters } from 'vuex'
@@ -65,6 +73,10 @@ export default {
     seibun,
     mainImage,
     subImage1,
+    subImage2,
+    subImage3,
+    subImage4,
+    subImage5,
     confirm,
   },
   methods: {

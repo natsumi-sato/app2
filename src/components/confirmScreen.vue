@@ -13,13 +13,22 @@
     <div class="stock">{{ sharedState.state.property.stock }}</div>
     <div class="detail">{{ sharedState.state.property.detail }}</div>
     <div class="seibun">{{ sharedState.state.property.seibun }}</div>
-    <img v-show="uploadedImage" :src="uploadedImage" />
-    <img v-show="uploadedImage" :src="uploadedImage" />
+    <mainImageConfirm/>
+    <subImage1Confirm/>
+    <subImage2Confirm/>
+    <subImage3Confirm/>
+    <subImage4Confirm/>
+    <subImage5Confirm/>
   </div>
 </template>
 
 <script>
-import store from '@/store/index.js'
+import mainImageConfirm from '@/components/modules/mainImageConfirm.vue'
+import subImage1Confirm from '@/components/modules/subImage1Confirm.vue'
+import subImage2Confirm from '@/components/modules/subImage2Confirm.vue'
+import subImage3Confirm from '@/components/modules/subImage3Confirm.vue'
+import subImage4Confirm from '@/components/modules/subImage4Confirm.vue'
+import subImage5Confirm from '@/components/modules/subImage5Confirm.vue'
 import PropertyStore from '@/store/PropertyStore.js'
 import { mapState } from "vuex"
 
@@ -33,10 +42,12 @@ export default {
     };
   },
   components: {
-  },
-  computed: {
-    ...mapState('Image1', ['uploadedImage']),
-    ...mapState('Image2', ['uploadedImage'])
+    mainImageConfirm,
+    subImage1Confirm,
+    subImage2Confirm,
+    subImage3Confirm,
+    subImage4Confirm,
+    subImage5Confirm,
   },
 };
 </script>

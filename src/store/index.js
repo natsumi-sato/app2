@@ -57,5 +57,9 @@ export default new Vuex.Store({
     Edit,
     Image1: Image,
     Image2: Image,
+    Image3: Image,
+    Image4: Image,
+    Image5: Image,
+    Image6: Image,
   }
 })
