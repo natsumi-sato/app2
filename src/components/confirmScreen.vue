@@ -13,7 +13,7 @@
     <div class="stock">{{ sharedState.state.property.stock }}</div>
     <div class="detail">{{ sharedState.state.property.detail }}</div>
     <div class="seibun">{{ sharedState.state.property.seibun }}</div>
-    <div class="mainImage">{{ sharedState.state.property.mainImage }}</div>
+    <img :src="image">
   </div>
 </template>
 
@@ -27,7 +27,8 @@ export default {
     return {
       msg: "確認画面テスト",
       privateState: {},
-      sharedState: PropertyStore
+      sharedState: PropertyStore,
+      image: ''
     };
   },
   components: {
