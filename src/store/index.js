@@ -15,35 +15,46 @@ const Edit = {
    }
 }
 
-export default new Vuex.Store({
-  state: {
+const Image = {
+  namespaced: true,
+  /*state: {
     uploadedImage: '',
+  },*/
+  state() {
+    return {
+      uploadedImage: '',
+    };
   },
   getters: {
   },
   mutations: {
     // アップロードした画像を表示
-    createImage(a, b) {
-      console.log(a)
-      console.log(b)
+    createImage(state, payload) {
+      console.log(state)
+      console.log(payload)
       let reader = new FileReader();
-      reader.onload = (b) => {
-        a.uploadedImage = b.target.result;
+      reader.onload = (payload) => {
+        state.uploadedImage = payload.target.result;
+        console.log(state.uploadedImage)
       };
-      reader.readAsDataURL(b);
+      reader.readAsDataURL(payload);
     },
   },
   actions: {
-    onFileChange(a, b) {
-      console.log(a)
-      console.log(b)
-      let files = b.target.files || b.dataTransfer.files;
+    onFileChange(context, payload) {
+      console.log(context)
+      console.log(payload)
+      let files = payload.target.files || payload.dataTransfer.files;
       console.log(files[0])
       //this.createImage(files[0]);
-      a.commit('createImage', files[0])
+      context.commit('createImage', files[0])
     },
   },
+}
+
+export default new Vuex.Store({
   modules: {
     Edit,
+    Image1: Image,
   }
 })

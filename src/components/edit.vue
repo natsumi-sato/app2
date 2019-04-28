@@ -13,6 +13,7 @@
     <detail/>
     <seibun/>
     <mainImage/>
+    <subImage1/>
     <confirm/>
   </div>
 </template>
@@ -32,6 +33,7 @@ import stock from '@/components/modules/stock.vue'
 import detail from '@/components/modules/detail.vue'
 import seibun from '@/components/modules/seibun.vue'
 import mainImage from '@/components/modules/mainImage.vue'
+import subImage1 from '@/components/modules/subImage1.vue'
 import confirm from '@/components/modules/confirm.vue'
 
 import { mapGetters } from 'vuex'
@@ -62,6 +64,7 @@ export default {
     detail,
     seibun,
     mainImage,
+    subImage1,
     confirm,
   },
   methods: {

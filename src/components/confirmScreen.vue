@@ -14,6 +14,7 @@
     <div class="detail">{{ sharedState.state.property.detail }}</div>
     <div class="seibun">{{ sharedState.state.property.seibun }}</div>
     <img v-show="uploadedImage" :src="uploadedImage" />
+    <img v-show="uploadedImage" :src="uploadedImage" />
   </div>
 </template>
 
@@ -34,14 +35,8 @@ export default {
   components: {
   },
   computed: {
-    ...mapState(['uploadedImage'])
+    ...mapState('Image1', ['uploadedImage'])
   },
-  methods: {
-    testtt(e) {
-      console.log(e)
-      this.$store.dispatch("onFileChange", e)
-    },
-  }
 };
 </script>
 
