@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
     <label>{{title}}</label>
-    <input type="file" v-on:change="testtt">
+    <input type="file" v-on:change="uploadedImage1">
     <img v-show="uploadedImage" :src="uploadedImage" />
   </div>
   
@@ -20,12 +20,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['uploadedImage'])
+    ...mapState('Image2', ['uploadedImage'])
   },
   methods: {
-    testtt(e) {
+    uploadedImage1(e) {
       console.log(e)
-      this.$store.dispatch("onFileChange", e)
+      this.$store.dispatch("Image2/onFileChange", e)
     },
   }
 }

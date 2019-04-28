@@ -35,7 +35,8 @@ export default {
   components: {
   },
   computed: {
-    ...mapState('Image1', ['uploadedImage'])
+    ...mapState('Image1', ['uploadedImage']),
+    ...mapState('Image2', ['uploadedImage'])
   },
 };
 </script>
