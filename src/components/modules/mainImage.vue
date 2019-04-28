@@ -1,13 +1,14 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="file" type="file" @change="fileSelected">
-      <img :src="image">
+      <input type="file" v-on:change="testtt">
+      <img v-show="uploadedImage" :src="uploadedImage" />
     </div>
 </template>
 
 <script>
 import PropertyStore from '@/store/PropertyStore.js'
+import { mapState } from "vuex"
 
 export default {
   name: 'mainImage',
@@ -16,18 +17,17 @@ export default {
       title: 'メイン画像',
       privateState: {},
       sharedState: PropertyStore,
-      image: ''
+      
     }
   },
+  computed: {
+    ...mapState(['uploadedImage'])
+  },
   methods: {
-    fileSelected(evt) {
-      var file = evt.target.files.item(0); // 挺特別的
-      var fileReader = new FileReader();
-      fileReader.addEventListener('load', (event) => {
-        this.image = event.target.result;
-      });
-      fileReader.readAsDataURL(file);
-    }
+    testtt(e) {
+      console.log(e)
+      this.$store.dispatch("onFileChange", e)
+    },
   }
 }
 </script>
