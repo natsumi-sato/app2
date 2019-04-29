@@ -7,8 +7,7 @@
     <input type="text" v-model="keyword">
     <table>
       <tr v-for="user in filteredUsers">
-        <td v-text="user.id"></td>
-        <td v-text="user.name"></td>
+        <td v-text="user.name" @click="setText"></td>
       </tr>
     </table>
     <hr>
@@ -76,7 +75,13 @@ export default {
 
       return users;
     }
-  }
+  },
+  methods: {
+    setText: function (event) {
+      console.log(event)
+      this.keyword = event.srcElement.innerText
+    }
+  },
 };
 </script>
 
@@ -84,7 +89,13 @@ export default {
 <style scoped lang="sass">
 $redColor: #E63562
 
-.validation
-  color: $redColor
+.form-group
+  .validation
+    color: $redColor
+  table
+    td
+      cursor: pointer
+      &:hover
+        background-color: skyblue
 
 </style>
