@@ -1,22 +1,24 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="sharedState.state.property.sellPrice">
+      <input class="input" v-model="sellPrice">
     </div>
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
-
 export default {
   name: 'sellPrice',
   data () {
     return {
       title: '販売価格',
-      privateState: {},
-      sharedState: PropertyStore
     }
-  }
+  },
+  computed: {
+    sellPrice: {
+      get () { return this.$store.state.PropertyStore.sellPrice },
+      set (val) { this.$store.commit('PropertyStore/setSellPrice', val) },
+    },
+  },
 }
 </script>
 

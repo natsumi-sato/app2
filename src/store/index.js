@@ -40,6 +40,26 @@ const PropertyStore = {
       state.itemName = payload
       console.log(state.itemName)
     },
+    setListPrice(state, payload) {
+      state.listPrice = payload
+      console.log(state.listPrice)
+    },
+    setSellPrice(state, payload) {
+      state.sellPrice = payload
+      console.log(state.sellPrice)
+    },
+    setBrand(state, payload) {
+      state.brand = payload
+      console.log(state.brand)
+    },
+    setCategory(state, payload) {
+      state.category = payload
+      console.log(state.category)
+    },
+    setColor(state, payload) {
+      state.color = payload
+      console.log(state.color)
+    },
   }
 }
 

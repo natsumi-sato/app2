@@ -2,11 +2,11 @@
   <div class="comfirmWrap">
     <p>{{ msg }}</p>
     <div class="itemName">{{ itemName }}</div>
-    <div class="listPrice">{{ sharedState.state.property.listPrice }}</div>
-    <div class="sellPrice">{{ sharedState.state.property.sellPrice }}</div>
-    <div class="brand">{{ sharedState.state.property.brand }}</div>
-    <div class="category">{{ sharedState.state.property.category }}</div>
-    <div class="color">{{ sharedState.state.property.color }}</div>
+    <div class="listPrice">{{ listPrice }}</div>
+    <div class="sellPrice">{{ sellPrice }}</div>
+    <div class="brand">{{ brand }}</div>
+    <div class="category">{{ category }}</div>
+    <div class="color">{{ color }}</div>
     <div class="postage">{{ sharedState.state.property.postage }}</div>
     <div class="point">{{ sharedState.state.property.point }}</div>
     <div class="importFlag">{{ sharedState.state.property.importFlag }}</div>
@@ -50,7 +50,9 @@ export default {
     subImage5Confirm,
   },
   computed: {
-    ...mapState('PropertyStore', ['itemName'])
+    ...mapState(
+      'PropertyStore', ['itemName', 'listPrice', 'sellPrice', 'brand', 'category', 'color', 'postage', 'point', 'importFlag', 'stock', 'detail', 'seibun'],
+    )
   },  
 };
 </script>

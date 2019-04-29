@@ -1,15 +1,11 @@
 <template>
   <div class="form-group">
     <label>{{title}}</label>
-    <!--<input type="text" v-model="title">-->
     <input class="input" v-model="itemName">
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-//import store from '@/store/index.js'
-//import PropertyStore from '@/store/PropertyStore.js'
 import { mapState } from "vuex"
 
 export default {
@@ -17,7 +13,6 @@ export default {
   data() {
     return {
       title: "商品名",
-      //sharedState: PropertyStore
     };
   },
   computed: {

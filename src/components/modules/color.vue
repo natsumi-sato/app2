@@ -1,22 +1,24 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="sharedState.state.property.color">
+      <input class="input" v-model="color">
     </div>
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
-
 export default {
   name: 'color',
   data () {
     return {
       title: 'カラー',
-      privateState: {},
-      sharedState: PropertyStore
     }
-  }
+  },
+  computed: {
+    color: {
+      get () { return this.$store.state.PropertyStore.color },
+      set (val) { this.$store.commit('PropertyStore/setColor', val) },
+    },
+  },
 }
 </script>
 

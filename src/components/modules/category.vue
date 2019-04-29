@@ -1,22 +1,24 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="sharedState.state.property.category">
+      <input class="input" v-model="category">
     </div>
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
-
 export default {
   name: 'category',
   data () {
     return {
       title: 'カテゴリ',
-      privateState: {},
-      sharedState: PropertyStore
     }
-  }
+  },
+  computed: {
+    category: {
+      get () { return this.$store.state.PropertyStore.category },
+      set (val) { this.$store.commit('PropertyStore/setCategory', val) },
+    },
+  },
 }
 </script>
 
