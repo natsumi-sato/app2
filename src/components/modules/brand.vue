@@ -2,15 +2,12 @@
   <div class="form-group">
     <label>{{title}}</label>
     <span class="validation" v-if="brandValidation">{{brandValidation}}</span>
-    <input class="input" v-model="brand">
-    <hr>
-    <input type="text" v-model="keyword">
+    <input type="text" v-model="brand">
     <table>
       <tr v-for="user in filteredUsers">
         <td v-text="user.name" @click="setText"></td>
       </tr>
     </table>
-    <hr>
   </div>
 </template>
 
@@ -22,29 +19,6 @@ export default {
   data() {
     return {
       title: "ブランド",
-      keyword: "",
-      users: [
-        {
-          id: 1,
-          name: "キャンメイク"
-        },
-        {
-          id: 2,
-          name: "セザンヌ"
-        },
-        {
-          id: 3,
-          name: "Dior"
-        },
-        {
-          id: 4,
-          name: "RMK"
-        },
-        {
-          id: 5,
-          name: "ジルスチュアート"
-        }
-      ]
     };
   },
   computed: {
@@ -56,32 +30,39 @@ export default {
         this.$store.commit("PropertyStore/setBrand", val);
       }
     },
-    ...mapState("PropertyStore", ["brandValidation"]),
+    ...mapState("PropertyStore", ["brandValidation", "brands", "brandValidation"]),
     filteredUsers: function() {
-      var users = [];
+      var brands = [];
 
-      for (var i in this.users) {
-        var user = this.users[i];
+      for (var i in this.brands) {
+        var onebrand = this.brands[i];
 
-        if (user.name.indexOf(this.keyword) !== -1) {
-          users.push(user);
+        if (onebrand.name.indexOf(this.brand) !== -1) {
+          brands.push(onebrand);
         }
 
-        if(this.keyword == 0) {
-          var users = [];
+        if (this.brand == 0) {
+          var brands = [];
         }
-        
       }
 
-      return users;
+      return brands;
     }
   },
   methods: {
-    setText: function (event) {
-      console.log(event)
-      this.keyword = event.srcElement.innerText
+    setText: function(event) {
+      console.log(event);
+      this.brand = event.srcElement.innerText;
     }
   },
+  beforeCreate: function() {
+    /* axios.get("@/json/brandList.json").then(function(response) {
+        this.users = response.data;
+      })
+      .catch(function(error) {
+        console.log(error);
+      }); */
+  }
 };
 </script>
 

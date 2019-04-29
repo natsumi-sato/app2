@@ -36,7 +36,36 @@ const PropertyStore = {
       itemNameValidation: '',
       listPriceValidation: '',
       sellPriceValidation: '',
-
+      brandValidation: '',
+      brands: [
+        {
+          id: 1,
+          name: "キャンメイク"
+        },
+        {
+          id: 2,
+          name: "セザンヌ"
+        },
+        {
+          id: 3,
+          name: "Dior"
+        },
+        {
+          id: 4,
+          name: "RMK"
+        },
+        {
+          id: 5,
+          name: "ジルスチュアート"
+        }
+      ],
+      brandList: [
+        "キャンメイク",
+        "セザンヌ",
+        "Dior",
+        "RMK",
+        "ジルスチュアート",
+      ]
     };
   },
   mutations: {
@@ -117,7 +146,11 @@ const PropertyStore = {
       }
 
       //ブランド
-      
+      if (state.brandList.includes(state.brand)) {
+        state.brandValidation = ""
+      } else {
+        state.brandValidation = "このブランドは登録されておりません"
+      }      
     }
   },
 }
