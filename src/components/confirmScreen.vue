@@ -1,7 +1,7 @@
 <template>
   <div class="comfirmWrap">
     <p>{{ msg }}</p>
-    <div class="itemName">{{ sharedState.state.property.itemName }}</div>
+    <div class="itemName">{{ itemName }}</div>
     <div class="listPrice">{{ sharedState.state.property.listPrice }}</div>
     <div class="sellPrice">{{ sharedState.state.property.sellPrice }}</div>
     <div class="brand">{{ sharedState.state.property.brand }}</div>
@@ -49,6 +49,9 @@ export default {
     subImage4Confirm,
     subImage5Confirm,
   },
+  computed: {
+    ...mapState('PropertyStore', ['itemName'])
+  },  
 };
 </script>
 

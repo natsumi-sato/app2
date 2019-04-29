@@ -15,6 +15,34 @@ const Edit = {
    }
 }
 
+const PropertyStore = {
+  namespaced: true,
+  state() {
+    return {
+      type: '1',
+      itemName: '',
+      listPrice: '',
+      sellPrice: '',
+      brand: '',
+      category: '',
+      color: '',
+      postage: '',
+      point: '',
+      importFlag: '',
+      stock: '',
+      detail: '',
+      seibun: '',
+      mainImage: '',
+    };
+  },
+  mutations: {
+    setItemName(state, payload) {
+      state.itemName = payload
+      console.log(state.itemName)
+    },
+  }
+}
+
 const Image = {
   namespaced: true,
   /*state: {
@@ -55,6 +83,7 @@ const Image = {
 export default new Vuex.Store({
   modules: {
     Edit,
+    PropertyStore,
     Image1: Image,
     Image2: Image,
     Image3: Image,
