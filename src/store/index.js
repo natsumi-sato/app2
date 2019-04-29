@@ -33,6 +33,10 @@ const PropertyStore = {
       detail: '',
       seibun: '',
       mainImage: '',
+      itemNameValidation: '',
+      listPriceValidation: '',
+      sellPriceValidation: '',
+
     };
   },
   mutations: {
@@ -84,8 +88,37 @@ const PropertyStore = {
       state.seibun = payload
       console.log(state.seibun)
     },
-  }
+  },
+  actions: {
+    buttonAction({ commit, state, rootState })  {
+      console.log(state.itemName)
+
+      if (state.itemName.length >= 3) {
+        state.itemNameValidation = ""
+      } else {
+        state.itemNameValidation = "3文字以上入力してください。"
+      }
+      
+      //正規表現パターン（半角英数に一致）
+      var regex = new RegExp(/^[0-9]*$/);
+
+      //定価
+      if (regex.test(state.listPrice)) {
+        state.listPriceValidation = ""
+      } else {
+        state.listPriceValidation = "半角英数字で入力してください。"
+      }
+
+      //販売価格
+      if (regex.test(state.sellPrice) && state.sellPrice.length > 0) {
+        state.sellPriceValidation = ""
+      } else {
+        state.sellPriceValidation = "半角英数字で入力してください。"
+      }
+    }
+  },
 }
+
 
 const Image = {
   namespaced: true,
@@ -124,6 +157,19 @@ const Image = {
   },
 }
 
+const Submit = {
+  namespaced: true,
+  state() {
+    return {
+    };
+  },
+  mutations: {
+  },
+  actions: {
+  },
+
+}
+
 export default new Vuex.Store({
   modules: {
     Edit,
@@ -134,5 +180,6 @@ export default new Vuex.Store({
     Image4: Image,
     Image5: Image,
     Image6: Image,
+    Submit,
   }
 })
