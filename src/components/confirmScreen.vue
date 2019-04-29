@@ -7,12 +7,12 @@
     <div class="brand">{{ brand }}</div>
     <div class="category">{{ category }}</div>
     <div class="color">{{ color }}</div>
-    <div class="postage">{{ sharedState.state.property.postage }}</div>
-    <div class="point">{{ sharedState.state.property.point }}</div>
-    <div class="importFlag">{{ sharedState.state.property.importFlag }}</div>
-    <div class="stock">{{ sharedState.state.property.stock }}</div>
-    <div class="detail">{{ sharedState.state.property.detail }}</div>
-    <div class="seibun">{{ sharedState.state.property.seibun }}</div>
+    <div class="postage">{{ postage }}</div>
+    <div class="point">{{ point }}</div>
+    <div class="importFlag">{{ importFlag }}</div>
+    <div class="stock">{{ stock }}</div>
+    <div class="detail">{{ detail }}</div>
+    <div class="seibun">{{ seibun }}</div>
     <mainImageConfirm/>
     <subImage1Confirm/>
     <subImage2Confirm/>
@@ -29,7 +29,6 @@ import subImage2Confirm from '@/components/modules/subImage2Confirm.vue'
 import subImage3Confirm from '@/components/modules/subImage3Confirm.vue'
 import subImage4Confirm from '@/components/modules/subImage4Confirm.vue'
 import subImage5Confirm from '@/components/modules/subImage5Confirm.vue'
-import PropertyStore from '@/store/PropertyStore.js'
 import { mapState } from "vuex"
 
 export default {
@@ -37,8 +36,6 @@ export default {
   data() {
     return {
       msg: "確認画面テスト",
-      privateState: {},
-      sharedState: PropertyStore,
     };
   },
   components: {

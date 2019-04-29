@@ -46,15 +46,11 @@ import confirm from '@/components/modules/confirm.vue'
 
 import { mapGetters } from 'vuex'
 
-import PropertyStore from '@/store/PropertyStore.js'
-
 export default {
   name: "editWrap",
   data() {
     return {
       msg: "あああ",
-      privateState: {},
-      sharedState: PropertyStore
     };
   },
   components: {

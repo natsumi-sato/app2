@@ -3,7 +3,6 @@
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
 import { mapState } from "vuex"
 
 export default {
@@ -11,7 +10,6 @@ export default {
   data () {
     return {
       title: 'サブ画像1枚目',
-      privateState: {},
     }
   },
   computed: {

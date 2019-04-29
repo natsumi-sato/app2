@@ -60,6 +60,30 @@ const PropertyStore = {
       state.color = payload
       console.log(state.color)
     },
+    setPostage(state, payload) {
+      state.postage = payload
+      console.log(state.postage)
+    },
+    setPoint(state, payload) {
+      state.point = payload
+      console.log(state.point)
+    },
+    setImportFlag(state, payload) {
+      state.importFlag = payload
+      console.log(state.importFlag)
+    },
+    setStock(state, payload) {
+      state.stock = payload
+      console.log(state.stock)
+    },
+    setDetail(state, payload) {
+      state.detail = payload
+      console.log(state.detail)
+    },
+    setSeibun(state, payload) {
+      state.seibun = payload
+      console.log(state.seibun)
+    },
   }
 }
 
