@@ -153,6 +153,7 @@ const PropertyStore = {
     buttonAction({ commit, state, rootState })  {
       console.log(state.itemName)
 
+      //商品名
       if (state.itemName.length >= 3) {
         state.itemNameValidation = ""
       } else {
@@ -195,6 +196,12 @@ const PropertyStore = {
         state.pointValidation = ""
       } else {
         state.pointValidation = "半角英数字で入力してください。"
+      }
+
+      //バリデーションが通ったら確認画面へプッシュ！
+      if (state.itemNameValidation == 0 && state.listPriceValidation == 0 && state.sellPriceValidation == 0 && state.brandValidation == 0 && state.categoryValidation == 0 && state.pointValidation == 0 ) {
+        console.log("プッシュ！")
+        router.push('/confirm')
       }
 
     }

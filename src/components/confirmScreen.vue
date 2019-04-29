@@ -19,6 +19,8 @@
     <subImage3Confirm/>
     <subImage4Confirm/>
     <subImage5Confirm/>
+    <br>
+    <router-link to="/" tag="button">戻って修正</router-link>
   </div>
 </template>
 
