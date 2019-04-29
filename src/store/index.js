@@ -115,6 +115,9 @@ const PropertyStore = {
       } else {
         state.sellPriceValidation = "半角英数字で入力してください。"
       }
+
+      //ブランド
+      
     }
   },
 }
@@ -167,7 +170,6 @@ const Submit = {
   },
   actions: {
   },
-
 }
 
 export default new Vuex.Store({
