@@ -4,10 +4,18 @@
     <span class="validation" v-if="brandValidation">{{brandValidation}}</span>
     <input type="text" v-model="brand">
     <table>
-      <tr v-for="user in filteredUsers">
-        <td v-text="user.name" @click="setText"></td>
+      <tr v-for="suggestBrand in filteredBrands">
+        <td v-text="suggestBrand.name" @click="setText"></td>
       </tr>
     </table>
+    <p>下記のブランドを登録してあります。<br>また、サジェストをクリックするとそのブランドがinputに入ります。</p>
+    <ul>
+      <li>キャンメイク</li>
+      <li>セザンヌ</li>
+      <li>Dior</li>
+      <li>RMK</li>
+      <li>ジルスチュアート</li>
+    </ul>
   </div>
 </template>
 
@@ -30,15 +38,15 @@ export default {
         this.$store.commit("PropertyStore/setBrand", val);
       }
     },
-    ...mapState("PropertyStore", ["brandValidation", "brands", "brandValidation"]),
-    filteredUsers: function() {
+    ...mapState("PropertyStore", ["brandValidation", "brands"]),
+    filteredBrands: function() {
       var brands = [];
 
       for (var i in this.brands) {
-        var onebrand = this.brands[i];
+        var oneBrand = this.brands[i];
 
-        if (onebrand.name.indexOf(this.brand) !== -1) {
-          brands.push(onebrand);
+        if (oneBrand.name.indexOf(this.brand) !== -1) {
+          brands.push(oneBrand);
         }
 
         if (this.brand == 0) {
@@ -76,7 +84,8 @@ $redColor: #E63562
   table
     td
       cursor: pointer
+      background-color: skyblue
       &:hover
-        background-color: skyblue
+        background-color: blue
 
 </style>

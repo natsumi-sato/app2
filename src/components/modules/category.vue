@@ -1,11 +1,28 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="category">
+      <span class="validation" v-if="categoryValidation">{{categoryValidation}}</span>
+      <input type="text" v-model="category">
+    <table>
+      <tr v-for="suggestCategory in filteredCategorys">
+        <td v-text="suggestCategory.name" @click="setText"></td>
+      </tr>
+    </table>
+    <p>下記のブランドを登録してあります。<br>また、サジェストをクリックするとそのブランドがinputに入ります。</p>
+    <ul>
+      <li>口紅</li>
+      <li>ファンデ</li>
+      <li>アイシャドウ</li>
+      <li>チーク</li>
+      <li>シャンプー/コンディショナー</li>
+    </ul>
+  </div>
     </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: 'category',
   data () {
@@ -18,11 +35,46 @@ export default {
       get () { return this.$store.state.PropertyStore.category },
       set (val) { this.$store.commit('PropertyStore/setCategory', val) },
     },
+    ...mapState("PropertyStore", ["categoryValidation", "categorys"]),
+    filteredCategorys: function() {
+      var categorys = [];
+
+      for (var i in this.categorys) {
+        var oneCotegory = this.categorys[i];
+
+        if (oneCotegory.name.indexOf(this.category) !== -1) {
+          categorys.push(oneCotegory);
+        }
+
+        if (this.category == 0) {
+          var categorys = [];
+        }
+      }
+
+      return categorys;
+    },
+  },
+  methods: {
+    setText: function(event) {
+      console.log(event);
+      this.category = event.srcElement.innerText;
+    }
   },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="sass">
+$redColor: #E63562
+
+.form-group
+  .validation
+    color: $redColor
+  table
+    td
+      cursor: pointer
+      background-color: skyblue
+      &:hover
+        background-color: blue
 
 </style>

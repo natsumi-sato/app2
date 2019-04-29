@@ -37,6 +37,8 @@ const PropertyStore = {
       listPriceValidation: '',
       sellPriceValidation: '',
       brandValidation: '',
+      categoryValidation: '',
+      pointValidation: '',
       brands: [
         {
           id: 1,
@@ -65,7 +67,36 @@ const PropertyStore = {
         "Dior",
         "RMK",
         "ジルスチュアート",
-      ]
+      ],
+      categorys: [
+        {
+          id: 1,
+          name: "口紅"
+        },
+        {
+          id: 2,
+          name: "ファンデ"
+        },
+        {
+          id: 3,
+          name: "アイシャドウ"
+        },
+        {
+          id: 4,
+          name: "チーク"
+        },
+        {
+          id: 5,
+          name: "シャンプー/コンディショナー"
+        }
+      ],
+      categoryList: [
+        "口紅",
+        "ファンデ",
+        "アイシャドウ",
+        "チーク",
+        "シャンプー/コンディショナー",
+      ],
     };
   },
   mutations: {
@@ -151,6 +182,21 @@ const PropertyStore = {
       } else {
         state.brandValidation = "このブランドは登録されておりません"
       }      
+
+      //カテゴリ
+      if (state.categoryList.includes(state.category)) {
+        state.categoryValidation = ""
+      } else {
+        state.categoryValidation = "このカテゴリは登録されておりません"
+      } 
+
+      //ポイント
+      if (regex.test(state.point)) {
+        state.pointValidation = ""
+      } else {
+        state.pointValidation = "半角英数字で入力してください。"
+      }
+
     }
   },
 }
