@@ -178,11 +178,15 @@ const PropertyStore = {
       }
 
       //ブランド
-      if (state.brandList.includes(state.brand)) {
-        state.brandValidation = ""
-      } else {
-        state.brandValidation = "このブランドは登録されておりません"
-      }      
+      for (var i in state.brands) {
+        console.log(state.brands[i].name)
+        
+        if (state.brands[i].name.indexOf(state.brand) !== -1) {
+          state.brandValidation = ""
+        } else {
+          state.brandValidation = "このブランドは登録されておりません"
+        }
+      }
 
       //カテゴリ
       if (state.categoryList.includes(state.category)) {
