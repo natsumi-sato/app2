@@ -246,18 +246,6 @@ const Image = {
   },
 }
 
-const Submit = {
-  namespaced: true,
-  state() {
-    return {
-    };
-  },
-  mutations: {
-  },
-  actions: {
-  },
-}
-
 export default new Vuex.Store({
   modules: {
     Edit,
