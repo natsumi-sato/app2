@@ -61,13 +61,6 @@ const PropertyStore = {
           name: "ジルスチュアート"
         }
       ],
-      brandList: [
-        "キャンメイク",
-        "セザンヌ",
-        "Dior",
-        "RMK",
-        "ジルスチュアート",
-      ],
       categorys: [
         {
           id: 1,
@@ -89,13 +82,6 @@ const PropertyStore = {
           id: 5,
           name: "シャンプー/コンディショナー"
         }
-      ],
-      categoryList: [
-        "口紅",
-        "ファンデ",
-        "アイシャドウ",
-        "チーク",
-        "シャンプー/コンディショナー",
       ],
     };
   },
@@ -179,21 +165,23 @@ const PropertyStore = {
 
       //ブランド
       for (var i in state.brands) {
-        console.log(state.brands[i].name)
-        
-        if (state.brands[i].name.indexOf(state.brand) !== -1) {
+        console.log(state.brands[i].name + "テスト")
+        state.brandValidation = "このブランドは登録されておりません"
+        if (state.brands[i].name == state.brand) {
           state.brandValidation = ""
-        } else {
-          state.brandValidation = "このブランドは登録されておりません"
-        }
+          break
+        } 
       }
 
       //カテゴリ
-      if (state.categoryList.includes(state.category)) {
-        state.categoryValidation = ""
-      } else {
-        state.categoryValidation = "このカテゴリは登録されておりません"
-      } 
+      for (var i in state.categorys) {
+        console.log(state.categorys[i].name + "テスト")
+        state.categoryValidation = "このブランドは登録されておりません"
+        if (state.categorys[i].name == state.category) {
+          state.categoryValidation = ""
+          break
+        } 
+      }
 
       //ポイント
       if (regex.test(state.point)) {
