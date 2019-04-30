@@ -38,23 +38,23 @@ export default {
         this.$store.commit("PropertyStore/setBrand", val);
       }
     },
-    ...mapState("PropertyStore", ["brandValidation", "brands"]),
+    ...mapState("PropertyStore", ["brandValidation", "brandList"]),
     filteredBrands: function() {
-      var brands = [];
+      var brandList = [];
 
-      for (var i in this.brands) {
-        var oneBrand = this.brands[i];
+      for (var i in this.brandList) {
+        var oneBrand = this.brandList[i];
 
-        if (oneBrand.name.indexOf(this.brand) !== -1) {
-          brands.push(oneBrand);
+        if (oneBrand.indexOf(this.brand) !== -1) {
+          brandList.push(oneBrand);
         }
 
         if (this.brand == 0) {
-          var brands = [];
+           brandList = [];
         }
       }
 
-      return brands;
+      return brandList;
     }
   },
   methods: {
