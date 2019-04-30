@@ -256,6 +256,5 @@ export default new Vuex.Store({
     Image4: Image,
     Image5: Image,
     Image6: Image,
-    Submit,
   }
 })
