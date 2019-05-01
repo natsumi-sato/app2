@@ -20,13 +20,15 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
+import axios from 'axios';
 
 export default {
   name: "brand",
   data() {
     return {
       title: "ブランド",
+      axiosText: "",
     };
   },
   computed: {
@@ -38,12 +40,15 @@ export default {
         this.$store.commit("PropertyStore/setBrand", val);
       }
     },
-    ...mapState("PropertyStore", ["brandValidation", "brands"]),
+    ...mapState("PropertyStore", ["brandValidation"]),
     filteredBrands: function() {
       var brands = [];
 
-      for (var i in this.brands) {
-        var oneBrand = this.brands[i];
+      for (var i in this.axiosText) {
+        var oneBrand = this.axiosText[i];
+        //console.log(JSON.stringify(this.axiosText,null,'\t'))
+        //console.log(this.axiosText[0].name)
+        //console.log(oneBrand.name)
 
         if (oneBrand.name.indexOf(this.brand) !== -1) {
           brands.push(oneBrand);
@@ -59,17 +64,20 @@ export default {
   },
   methods: {
     setText: function(event) {
-      console.log(event);
+      //console.log(event);
       this.brand = event.srcElement.innerText;
     }
   },
-  beforeCreate: function() {
-    /* axios.get("@/json/brandList.json").then(function(response) {
-        this.users = response.data;
-      })
-      .catch(function(error) {
-        console.log(error);
-      }); */
+  created: function() {
+    var self = this;
+    axios.get("./static/brandList.json").then(function(response) {
+      //console.log(response.data)
+      self.axiosText = response.data
+      //console.log(JSON.stringify(self.axiosText,null,'\t'))
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
   }
 };
 </script>

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -39,7 +40,7 @@ const PropertyStore = {
       brandValidation: '',
       categoryValidation: '',
       pointValidation: '',
-      brands: [
+      /* brands: [
         {
           id: 1,
           name: "キャンメイク"
@@ -60,8 +61,9 @@ const PropertyStore = {
           id: 5,
           name: "ジルスチュアート"
         }
-      ],
-      categorys: [
+      ], */
+      brandsJSON: [],
+      /* categorys: [
         {
           id: 1,
           name: "口紅"
@@ -82,7 +84,8 @@ const PropertyStore = {
           id: 5,
           name: "シャンプー/コンディショナー"
         }
-      ],
+      ], */
+      categorysJSON: [],
     };
   },
   mutations: {
@@ -134,6 +137,9 @@ const PropertyStore = {
       state.seibun = payload
       console.log(state.seibun)
     },
+    axiosTest2(state) {
+      console.log('テストンゴ')
+    },
   },
   actions: {
     buttonAction({ commit, state, rootState })  {
@@ -164,24 +170,40 @@ const PropertyStore = {
       }
 
       //ブランド
-      for (var i in state.brands) {
-        console.log(state.brands[i].name + "テスト")
-        state.brandValidation = "このブランドは登録されておりません"
-        if (state.brands[i].name == state.brand) {
-          state.brandValidation = ""
-          break
-        } 
-      }
+      axios.get("./static/brandList.json").then(function(response) {
+        //console.log(response.data + "ウヘア")
+        state.brandsJSON = response.data
+        //console.log(JSON.stringify(state.brandsJSON,null,'\t'))
+        for (var i in state.brandsJSON) {
+          //console.log(state.brandsJSON[i].name + "テストおおおお")
+          state.brandValidation = "このブランドは登録されておりません"
+          if (state.brandsJSON[i].name == state.brand) {
+            state.brandValidation = ""
+            break
+          } 
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+      
 
       //カテゴリ
-      for (var i in state.categorys) {
-        console.log(state.categorys[i].name + "テスト")
-        state.categoryValidation = "このブランドは登録されておりません"
-        if (state.categorys[i].name == state.category) {
-          state.categoryValidation = ""
-          break
-        } 
-      }
+      axios.get("./static/categorysList.json").then(function(response) {
+        state.categorysJSON = response.data
+        for (var i in state.categorysJSON) {
+          state.categoryValidation = "このカテゴリは登録されておりません"
+          if (state.categorysJSON[i].name == state.category) {
+            state.categoryValidation = ""
+            break
+          } 
+        }
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+      
 
       //ポイント
       if (regex.test(state.point)) {
@@ -196,6 +218,9 @@ const PropertyStore = {
         router.push('/confirm')
       }
 
+    },
+    axiosTest() {
+      commit('axiosTest2')
     }
   },
 }

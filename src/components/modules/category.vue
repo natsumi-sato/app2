@@ -22,12 +22,14 @@
 
 <script>
 import { mapState } from "vuex";
+import axios from 'axios';
 
 export default {
   name: 'category',
   data () {
     return {
       title: 'カテゴリ',
+      axiosText: "",
     }
   },
   computed: {
@@ -35,12 +37,12 @@ export default {
       get () { return this.$store.state.PropertyStore.category },
       set (val) { this.$store.commit('PropertyStore/setCategory', val) },
     },
-    ...mapState("PropertyStore", ["categoryValidation", "categorys"]),
+    ...mapState("PropertyStore", ["categoryValidation"]),
     filteredCategorys: function() {
       var categorys = [];
 
-      for (var i in this.categorys) {
-        var oneCotegory = this.categorys[i];
+      for (var i in this.axiosText) {
+        var oneCotegory = this.axiosText[i];
 
         if (oneCotegory.name.indexOf(this.category) !== -1) {
           categorys.push(oneCotegory);
@@ -56,10 +58,19 @@ export default {
   },
   methods: {
     setText: function(event) {
-      console.log(event);
+      //console.log(event);
       this.category = event.srcElement.innerText;
     }
   },
+  created: function() {
+    var self = this;
+    axios.get("./static/categorysList.json").then(function(response) {
+      self.axiosText = response.data
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
 }
 </script>
 
