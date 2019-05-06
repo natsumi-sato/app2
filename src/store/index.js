@@ -137,8 +137,13 @@ const PropertyStore = {
       state.seibun = payload
       console.log(state.seibun)
     },
-    axiosTest2(state) {
-      console.log('テストンゴ')
+    axiosLoad2(state, payload) {
+      console.log(payload)
+      state.brandsJSON = payload
+    },
+    axiosLoad3(state, payload) {
+      console.log(payload)
+      state.categorysJSON = payload
     },
   },
   actions: {
@@ -170,7 +175,7 @@ const PropertyStore = {
       }
 
       //ブランド
-      axios.get("./static/brandList.json").then(function(response) {
+      /* axios.get("./static/brandList.json").then(function(response) {
         //console.log(response.data + "ウヘア")
         state.brandsJSON = response.data
         //console.log(JSON.stringify(state.brandsJSON,null,'\t'))
@@ -185,11 +190,19 @@ const PropertyStore = {
       })
       .catch(function(error) {
         console.log(error);
-      });
+      }); */
+      for (var i in state.brandsJSON) {
+        state.brandValidation = "このブランドは登録されておりません"
+        if (state.brandsJSON[i].name == state.brand) {
+          state.brandValidation = ""
+          break
+        } 
+      }
+
       
 
       //カテゴリ
-      axios.get("./static/categorysList.json").then(function(response) {
+      /* axios.get("./static/categorysList.json").then(function(response) {
         state.categorysJSON = response.data
         for (var i in state.categorysJSON) {
           state.categoryValidation = "このカテゴリは登録されておりません"
@@ -201,7 +214,14 @@ const PropertyStore = {
       })
       .catch(function(error) {
         console.log(error);
-      });
+      }); */
+      for (var i in state.categorysJSON) {
+        state.categoryValidation = "このカテゴリは登録されておりません"
+        if (state.categorysJSON[i].name == state.category) {
+          state.categoryValidation = ""
+          break
+        } 
+      }
 
       
 
@@ -219,9 +239,22 @@ const PropertyStore = {
       }
 
     },
-    axiosTest() {
-      commit('axiosTest2')
-    }
+    axiosLoad1({state, commit, dispatch}, payload) {
+      //console.log('beforeCreateできるかな？')
+      axios.get("./static/brandList.json").then(function(response) {
+        commit('axiosLoad2', response.data)
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+      axios.get("./static/categorysList.json").then(function(response) {
+        commit('axiosLoad3', response.data)
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    },
   },
 }
 

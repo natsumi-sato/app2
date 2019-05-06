@@ -29,7 +29,6 @@ export default {
   data () {
     return {
       title: 'カテゴリ',
-      axiosText: "",
     }
   },
   computed: {
@@ -37,12 +36,12 @@ export default {
       get () { return this.$store.state.PropertyStore.category },
       set (val) { this.$store.commit('PropertyStore/setCategory', val) },
     },
-    ...mapState("PropertyStore", ["categoryValidation"]),
+    ...mapState("PropertyStore", ["categoryValidation", "categorysJSON"]),
     filteredCategorys: function() {
       var categorys = [];
 
-      for (var i in this.axiosText) {
-        var oneCotegory = this.axiosText[i];
+      for (var i in this.categorysJSON) {
+        var oneCotegory = this.categorysJSON[i];
 
         if (oneCotegory.name.indexOf(this.category) !== -1) {
           categorys.push(oneCotegory);

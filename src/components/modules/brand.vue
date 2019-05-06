@@ -28,7 +28,6 @@ export default {
   data() {
     return {
       title: "ブランド",
-      axiosText: "",
     };
   },
   computed: {
@@ -40,12 +39,12 @@ export default {
         this.$store.commit("PropertyStore/setBrand", val);
       }
     },
-    ...mapState("PropertyStore", ["brandValidation"]),
+    ...mapState("PropertyStore", ["brandValidation", "brandsJSON"]),
     filteredBrands: function() {
       var brands = [];
 
-      for (var i in this.axiosText) {
-        var oneBrand = this.axiosText[i];
+      for (var i in this.brandsJSON) {
+        var oneBrand = this.brandsJSON[i];
         //console.log(JSON.stringify(this.axiosText,null,'\t'))
         //console.log(this.axiosText[0].name)
         //console.log(oneBrand.name)
@@ -68,7 +67,7 @@ export default {
       this.brand = event.srcElement.innerText;
     }
   },
-  created: function() {
+  /* created: function() {
     var self = this;
     axios.get("./static/brandList.json").then(function(response) {
       //console.log(response.data)
@@ -78,7 +77,7 @@ export default {
     .catch(function(error) {
       console.log(error);
     });
-  }
+  } */
 };
 </script>
 

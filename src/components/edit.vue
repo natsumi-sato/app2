@@ -46,6 +46,8 @@ import confirm from '@/components/modules/confirm.vue'
 
 import { mapGetters } from 'vuex'
 
+
+
 export default {
   name: "editWrap",
   data() {
@@ -88,6 +90,9 @@ export default {
         alert(e.message)
       }
     }
+  },
+  beforeCreate () {
+    this.$store.dispatch('PropertyStore/axiosLoad1')
   }
 };
 </script>
