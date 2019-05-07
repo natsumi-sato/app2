@@ -40,51 +40,7 @@ const PropertyStore = {
       brandValidation: '',
       categoryValidation: '',
       pointValidation: '',
-      /* brands: [
-        {
-          id: 1,
-          name: "キャンメイク"
-        },
-        {
-          id: 2,
-          name: "セザンヌ"
-        },
-        {
-          id: 3,
-          name: "Dior"
-        },
-        {
-          id: 4,
-          name: "RMK"
-        },
-        {
-          id: 5,
-          name: "ジルスチュアート"
-        }
-      ], */
       brandsJSON: [],
-      /* categorys: [
-        {
-          id: 1,
-          name: "口紅"
-        },
-        {
-          id: 2,
-          name: "ファンデ"
-        },
-        {
-          id: 3,
-          name: "アイシャドウ"
-        },
-        {
-          id: 4,
-          name: "チーク"
-        },
-        {
-          id: 5,
-          name: "シャンプー/コンディショナー"
-        }
-      ], */
       categorysJSON: [],
     };
   },
@@ -137,11 +93,11 @@ const PropertyStore = {
       state.seibun = payload
       console.log(state.seibun)
     },
-    axiosLoad2(state, payload) {
+    axiosBrandsJSON(state, payload) {
       console.log(payload)
       state.brandsJSON = payload
     },
-    axiosLoad3(state, payload) {
+    axiosCategorysJSON(state, payload) {
       console.log(payload)
       state.categorysJSON = payload
     },
@@ -175,22 +131,6 @@ const PropertyStore = {
       }
 
       //ブランド
-      /* axios.get("./static/brandList.json").then(function(response) {
-        //console.log(response.data + "ウヘア")
-        state.brandsJSON = response.data
-        //console.log(JSON.stringify(state.brandsJSON,null,'\t'))
-        for (var i in state.brandsJSON) {
-          //console.log(state.brandsJSON[i].name + "テストおおおお")
-          state.brandValidation = "このブランドは登録されておりません"
-          if (state.brandsJSON[i].name == state.brand) {
-            state.brandValidation = ""
-            break
-          } 
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      }); */
       for (var i in state.brandsJSON) {
         state.brandValidation = "このブランドは登録されておりません"
         if (state.brandsJSON[i].name == state.brand) {
@@ -199,22 +139,7 @@ const PropertyStore = {
         } 
       }
 
-      
-
       //カテゴリ
-      /* axios.get("./static/categorysList.json").then(function(response) {
-        state.categorysJSON = response.data
-        for (var i in state.categorysJSON) {
-          state.categoryValidation = "このカテゴリは登録されておりません"
-          if (state.categorysJSON[i].name == state.category) {
-            state.categoryValidation = ""
-            break
-          } 
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      }); */
       for (var i in state.categorysJSON) {
         state.categoryValidation = "このカテゴリは登録されておりません"
         if (state.categorysJSON[i].name == state.category) {
@@ -222,8 +147,6 @@ const PropertyStore = {
           break
         } 
       }
-
-      
 
       //ポイント
       if (regex.test(state.point)) {
@@ -239,17 +162,16 @@ const PropertyStore = {
       }
 
     },
-    axiosLoad1({state, commit, dispatch}, payload) {
-      //console.log('beforeCreateできるかな？')
+    axiosJSON({state, commit, dispatch}, payload) {
       axios.get("./static/brandList.json").then(function(response) {
-        commit('axiosLoad2', response.data)
+        commit('axiosBrandsJSON', response.data)
       })
       .catch(function(error) {
         console.log(error);
       });
 
       axios.get("./static/categorysList.json").then(function(response) {
-        commit('axiosLoad3', response.data)
+        commit('axiosCategorysJSON', response.data)
       })
       .catch(function(error) {
         console.log(error);
@@ -258,12 +180,8 @@ const PropertyStore = {
   },
 }
 
-
 const Image = {
   namespaced: true,
-  /*state: {
-    uploadedImage: '',
-  },*/
   state() {
     return {
       uploadedImage: '',

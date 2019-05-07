@@ -45,9 +45,6 @@ export default {
 
       for (var i in this.brandsJSON) {
         var oneBrand = this.brandsJSON[i];
-        //console.log(JSON.stringify(this.axiosText,null,'\t'))
-        //console.log(this.axiosText[0].name)
-        //console.log(oneBrand.name)
 
         if (oneBrand.name.indexOf(this.brand) !== -1) {
           brands.push(oneBrand);
@@ -63,21 +60,9 @@ export default {
   },
   methods: {
     setText: function(event) {
-      //console.log(event);
       this.brand = event.srcElement.innerText;
     }
   },
-  /* created: function() {
-    var self = this;
-    axios.get("./static/brandList.json").then(function(response) {
-      //console.log(response.data)
-      self.axiosText = response.data
-      //console.log(JSON.stringify(self.axiosText,null,'\t'))
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  } */
 };
 </script>
 

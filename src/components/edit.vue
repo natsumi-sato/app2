@@ -46,8 +46,6 @@ import confirm from '@/components/modules/confirm.vue'
 
 import { mapGetters } from 'vuex'
 
-
-
 export default {
   name: "editWrap",
   data() {
@@ -92,7 +90,7 @@ export default {
     }
   },
   beforeCreate () {
-    this.$store.dispatch('PropertyStore/axiosLoad1')
+    this.$store.dispatch('PropertyStore/axiosJSON')
   }
 };
 </script>

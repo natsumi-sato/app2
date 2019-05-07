@@ -57,19 +57,9 @@ export default {
   },
   methods: {
     setText: function(event) {
-      //console.log(event);
       this.category = event.srcElement.innerText;
     }
   },
-  created: function() {
-    var self = this;
-    axios.get("./static/categorysList.json").then(function(response) {
-      self.axiosText = response.data
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  }
 }
 </script>
 
