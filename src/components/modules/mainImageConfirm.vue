@@ -1,10 +1,5 @@
 <template>
-  <div class="form-group">
-    <label>{{title}}</label>
-    <input type="file" v-on:change="uploadedImage1">
-    <img v-if="uploadedImage" :src="uploadedImage" />
-  </div>
-  
+    <img v-show="uploadedImage" :src="uploadedImage" />
 </template>
 
 <script>
@@ -14,16 +9,16 @@ export default {
   name: 'mainImage',
   data () {
     return {
-      title: 'メイン画像',
+      title: 'サブ画像1枚目',
     }
   },
   computed: {
     ...mapState('Image1', ['uploadedImage'])
   },
   methods: {
-    uploadedImage1(payload) {
-      console.log(payload)
-      this.$store.dispatch("Image1/onFileChange", payload)
+    uploadedImage1(e) {
+      console.log(e)
+      this.$store.dispatch("Image1/onFileChange", e)
     },
   }
 }

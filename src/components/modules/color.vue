@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input type="text">
+      <input class="input" v-model="color">
     </div>
 </template>
 
@@ -10,9 +10,15 @@ export default {
   name: 'color',
   data () {
     return {
-      title: 'カラー'
+      title: 'カラー',
     }
-  }
+  },
+  computed: {
+    color: {
+      get () { return this.$store.state.PropertyStore.color },
+      set (val) { this.$store.commit('PropertyStore/setColor', val) },
+    },
+  },
 }
 </script>
 

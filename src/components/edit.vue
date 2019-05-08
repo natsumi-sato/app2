@@ -6,7 +6,6 @@
     <brand/>
     <category/>
     <color/>
-    <capacity/>
     <postage/>
     <point/>
     <importFlag/>
@@ -14,9 +13,12 @@
     <detail/>
     <seibun/>
     <mainImage/>
+    <subImage1/>
+    <subImage2/>
+    <subImage3/>
+    <subImage4/>
+    <subImage5/>
     <confirm/>
-    <h1>{{ itemName }}</h1>
-    <p>{{ listPrice }}</p>
   </div>
 </template>
 
@@ -35,6 +37,11 @@ import stock from '@/components/modules/stock.vue'
 import detail from '@/components/modules/detail.vue'
 import seibun from '@/components/modules/seibun.vue'
 import mainImage from '@/components/modules/mainImage.vue'
+import subImage1 from '@/components/modules/subImage1.vue'
+import subImage2 from '@/components/modules/subImage2.vue'
+import subImage3 from '@/components/modules/subImage3.vue'
+import subImage4 from '@/components/modules/subImage4.vue'
+import subImage5 from '@/components/modules/subImage5.vue'
 import confirm from '@/components/modules/confirm.vue'
 
 import { mapGetters } from 'vuex'
@@ -61,12 +68,30 @@ export default {
     detail,
     seibun,
     mainImage,
+    subImage1,
+    subImage2,
+    subImage3,
+    subImage4,
+    subImage5,
     confirm,
   },
-  computed: mapGetters('String', {
-    'itemName': 'getStringitemName',
-    'listPrice': 'getStringlistPrice'
-  })
+  methods: {
+    validate: function (event) {
+      console.log(this.$el)
+      var valid = false
+      try {
+        valid = this.$data.sharedState.validate()
+        if (valid) {
+          this.$router.push('/confirm')
+        }
+      } catch (e) {
+        alert(e.message)
+      }
+    }
+  },
+  beforeCreate () {
+    this.$store.dispatch('PropertyStore/axiosJSON')
+  }
 };
 </script>
 

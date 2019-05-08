@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input type="text">
+      <input class="input" v-model="postage">
     </div>
 </template>
 
@@ -10,9 +10,15 @@ export default {
   name: 'postage',
   data () {
     return {
-      title: '送料'
+      title: '送料',
     }
-  }
+  },
+  computed: {
+    postage: {
+      get () { return this.$store.state.PropertyStore.postage },
+      set (val) { this.$store.commit('PropertyStore/setPostage', val) },
+    },
+  },
 }
 </script>
 

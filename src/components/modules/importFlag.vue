@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input type="text">
+      <input class="input" v-model="importFlag">
     </div>
 </template>
 
@@ -10,9 +10,15 @@ export default {
   name: 'importFlag',
   data () {
     return {
-      title: '並行輸入品フラグ'
+      title: '並行輸入品フラグ',
     }
-  }
+  },
+  computed: {
+    importFlag: {
+      get () { return this.$store.state.PropertyStore.importFlag },
+      set (val) { this.$store.commit('PropertyStore/setImportFlag', val) },
+    },
+  },
 }
 </script>
 

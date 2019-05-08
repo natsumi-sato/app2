@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input type="text">
+      <input class="input" v-model="detail">
     </div>
 </template>
 
@@ -10,9 +10,15 @@ export default {
   name: 'detail',
   data () {
     return {
-      title: '商品詳細'
+      title: '商品詳細',
     }
-  }
+  },
+  computed: {
+    detail: {
+      get () { return this.$store.state.PropertyStore.detail },
+      set (val) { this.$store.commit('PropertyStore/setDetail', val) },
+    },
+  },
 }
 </script>
 

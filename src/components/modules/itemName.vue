@@ -1,38 +1,36 @@
 <template>
   <div class="form-group">
     <label>{{title}}</label>
-    <input type="text" v-model="itemName">
+    <span class="validation" v-if="itemNameValidation">{{itemNameValidation}}</span>
+    <input class="input" v-model="itemName">
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-//import store from '@/store/index.js'
-import { mapGetters } from "vuex";
+import { mapState } from "vuex"
 
 export default {
   name: "itemName",
   data() {
     return {
-      title: "商品名"
+      title: "商品名",
     };
   },
   computed: {
     itemName: {
-      get() {
-        return this.$store.state.itemName;
-      },
-      set(value) {
-        this.$store.commit("updateItemName", value);
-      }
+      get () { return this.$store.state.PropertyStore.itemName },
+      set (val) { this.$store.commit('PropertyStore/setItemName', val) },
     },
-    ...mapGetters("Textarea", {
-      error: "getError"
-    })
-  }
+    ...mapState('PropertyStore', ['itemNameValidation'])
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="sass">
+$redColor: #E63562
+
+.validation
+  color: $redColor
+
 </style>
