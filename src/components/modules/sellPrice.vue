@@ -1,26 +1,36 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="sharedState.state.property.sellPrice">
+      <span class="validation" v-if="sellPriceValidation">{{sellPriceValidation}}</span>
+      <input class="input" v-model="sellPrice">
     </div>
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
+import { mapState } from "vuex"
 
 export default {
   name: 'sellPrice',
   data () {
     return {
       title: '販売価格',
-      privateState: {},
-      sharedState: PropertyStore
     }
-  }
+  },
+  computed: {
+    sellPrice: {
+      get () { return this.$store.state.PropertyStore.sellPrice },
+      set (val) { this.$store.commit('PropertyStore/setSellPrice', val) },
+    },
+    ...mapState('PropertyStore', ['sellPriceValidation'])
+  },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="sass">
+$redColor: #E63562
+
+.validation
+  color: $redColor
 
 </style>

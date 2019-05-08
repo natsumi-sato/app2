@@ -1,22 +1,24 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="sharedState.state.property.importFlag">
+      <input class="input" v-model="importFlag">
     </div>
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
-
 export default {
   name: 'importFlag',
   data () {
     return {
       title: '並行輸入品フラグ',
-      privateState: {},
-      sharedState: PropertyStore
     }
-  }
+  },
+  computed: {
+    importFlag: {
+      get () { return this.$store.state.PropertyStore.importFlag },
+      set (val) { this.$store.commit('PropertyStore/setImportFlag', val) },
+    },
+  },
 }
 </script>
 

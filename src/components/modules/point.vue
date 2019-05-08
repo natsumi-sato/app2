@@ -1,26 +1,36 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="sharedState.state.property.point">
+      <span class="validation" v-if="pointValidation">{{pointValidation}}</span>
+      <input class="input" v-model="point">
     </div>
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
+import { mapState } from "vuex"
 
 export default {
   name: 'point',
   data () {
     return {
       title: 'ポイント',
-      privateState: {},
-      sharedState: PropertyStore
     }
-  }
+  },
+  computed: {
+    point: {
+      get () { return this.$store.state.PropertyStore.point },
+      set (val) { this.$store.commit('PropertyStore/setPoint', val) },
+    },
+    ...mapState('PropertyStore', ['pointValidation'])
+  },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="sass">
+$redColor: #E63562
+
+.validation
+  color: $redColor
 
 </style>

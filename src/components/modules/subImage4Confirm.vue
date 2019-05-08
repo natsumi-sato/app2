@@ -3,14 +3,12 @@
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
 import { mapState } from "vuex"
 
 export default {
   name: 'mainImage',
   data () {
     return {
-      privateState: {},
     }
   },
   computed: {

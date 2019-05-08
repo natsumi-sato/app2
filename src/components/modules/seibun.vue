@@ -1,22 +1,24 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="sharedState.state.property.seibun">
+      <input class="input" v-model="seibun">
     </div>
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
-
 export default {
   name: 'seibun',
   data () {
     return {
       title: '成分',
-      privateState: {},
-      sharedState: PropertyStore
     }
-  }
+  },
+  computed: {
+    seibun: {
+      get () { return this.$store.state.PropertyStore.seibun },
+      set (val) { this.$store.commit('PropertyStore/setSeibun', val) },
+    },
+  },
 }
 </script>
 

@@ -2,13 +2,12 @@
   <div class="form-group">
     <label>{{title}}</label>
     <input type="file" v-on:change="uploadedImage1">
-    <img v-show="uploadedImage" :src="uploadedImage" />
+    <img v-if="uploadedImage" :src="uploadedImage" />
   </div>
   
 </template>
 
 <script>
-import PropertyStore from '@/store/PropertyStore.js'
 import { mapState } from "vuex"
 
 export default {
@@ -16,7 +15,6 @@ export default {
   data () {
     return {
       title: 'メイン画像',
-      privateState: {},
     }
   },
   computed: {
