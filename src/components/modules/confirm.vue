@@ -1,7 +1,6 @@
 <template>
   <div class="form-group">
-    <router-link to="/confirm" tag="button">{{ button }}</router-link>
-    <!--<button v-on:click="buttonAction">{{button}}</button>-->
+    <button v-on:click="buttonAction">{{button}}</button>
   </div>
 </template>
 
@@ -15,7 +14,7 @@ export default {
       button: "確認"
     };
   },
-  methods: mapActions('Edit', {
+  methods: mapActions('PropertyStore', {
     'buttonAction': 'buttonAction'
   }),
 };

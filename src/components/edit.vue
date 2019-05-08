@@ -88,6 +88,9 @@ export default {
         alert(e.message)
       }
     }
+  },
+  beforeCreate () {
+    this.$store.dispatch('PropertyStore/axiosJSON')
   }
 };
 </script>

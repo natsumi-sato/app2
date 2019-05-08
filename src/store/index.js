@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -33,6 +34,14 @@ const PropertyStore = {
       detail: '',
       seibun: '',
       mainImage: '',
+      itemNameValidation: '',
+      listPriceValidation: '',
+      sellPriceValidation: '',
+      brandValidation: '',
+      categoryValidation: '',
+      pointValidation: '',
+      brandsJSON: [],
+      categorysJSON: [],
     };
   },
   mutations: {
@@ -84,14 +93,95 @@ const PropertyStore = {
       state.seibun = payload
       console.log(state.seibun)
     },
-  }
+    axiosBrandsJSON(state, payload) {
+      console.log(payload)
+      state.brandsJSON = payload
+    },
+    axiosCategorysJSON(state, payload) {
+      console.log(payload)
+      state.categorysJSON = payload
+    },
+  },
+  actions: {
+    buttonAction({ commit, state, rootState })  {
+      console.log(state.itemName)
+
+      //商品名
+      if (state.itemName.length >= 3) {
+        state.itemNameValidation = ""
+      } else {
+        state.itemNameValidation = "3文字以上入力してください。"
+      }
+      
+      //正規表現パターン（半角英数に一致）
+      var regex = new RegExp(/^[0-9]*$/);
+
+      //定価
+      if (regex.test(state.listPrice)) {
+        state.listPriceValidation = ""
+      } else {
+        state.listPriceValidation = "半角英数字で入力してください。"
+      }
+
+      //販売価格
+      if (regex.test(state.sellPrice) && state.sellPrice.length > 0) {
+        state.sellPriceValidation = ""
+      } else {
+        state.sellPriceValidation = "半角英数字で入力してください。"
+      }
+
+      //ブランド
+      for (var i in state.brandsJSON) {
+        state.brandValidation = "このブランドは登録されておりません"
+        if (state.brandsJSON[i].name == state.brand) {
+          state.brandValidation = ""
+          break
+        } 
+      }
+
+      //カテゴリ
+      for (var i in state.categorysJSON) {
+        state.categoryValidation = "このカテゴリは登録されておりません"
+        if (state.categorysJSON[i].name == state.category) {
+          state.categoryValidation = ""
+          break
+        } 
+      }
+
+      //ポイント
+      if (regex.test(state.point)) {
+        state.pointValidation = ""
+      } else {
+        state.pointValidation = "半角英数字で入力してください。"
+      }
+
+      //バリデーションが通ったら確認画面へプッシュ！
+      if (state.itemNameValidation == 0 && state.listPriceValidation == 0 && state.sellPriceValidation == 0 && state.brandValidation == 0 && state.categoryValidation == 0 && state.pointValidation == 0 ) {
+        console.log("プッシュ！")
+        router.push('/confirm')
+      }
+
+    },
+    axiosJSON({state, commit, dispatch}, payload) {
+      axios.get("./static/brandList.json").then(function(response) {
+        commit('axiosBrandsJSON', response.data)
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+      axios.get("./static/categorysList.json").then(function(response) {
+        commit('axiosCategorysJSON', response.data)
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    },
+  },
 }
 
 const Image = {
   namespaced: true,
-  /*state: {
-    uploadedImage: '',
-  },*/
   state() {
     return {
       uploadedImage: '',
