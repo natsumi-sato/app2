@@ -4,7 +4,7 @@
 
     <div class="wrap">
       <swiper :options="swiperOption">
-        <swiper-slide>Slide 1</swiper-slide>
+        <swiper-slide><mainImageConfirm/></swiper-slide>
         <swiper-slide>Slide 2</swiper-slide>
         <swiper-slide>Slide 3</swiper-slide>
         <swiper-slide>Slide 4</swiper-slide>
@@ -14,9 +14,10 @@
         <swiper-slide>Slide 8</swiper-slide>
         <swiper-slide>Slide 9</swiper-slide>
         <swiper-slide>Slide 10</swiper-slide>
+        
         <div class="swiper-pagination" slot="pagination"></div>
-        <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>
+        <!-- <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>-->
       </swiper>
     </div>
 
@@ -41,6 +42,12 @@
     <subImage5Confirm/>
     <br>
     <router-link to="/" tag="button">戻って修正</router-link>
+    <hr>
+    <img v-if="uploadedImage" :src="uploadedImage" />
+    {{uploadedImage}}
+    {{msg}}
+    {{uploadedImageURL}}
+    <div v-bind:style="{ color: activeColor, backgroundImage: 'url(' + uploadedImage + ')' }">あああ</div>
   </div>
 </template>
 
@@ -51,10 +58,14 @@ import subImage2Confirm from "@/components/modules/subImage2Confirm.vue";
 import subImage3Confirm from "@/components/modules/subImage3Confirm.vue";
 import subImage4Confirm from "@/components/modules/subImage4Confirm.vue";
 import subImage5Confirm from "@/components/modules/subImage5Confirm.vue";
+import mainImageThumbnail from "@/components/modules/mainImageThumbnail.vue";
+
 import { mapState } from "vuex";
 
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+
+
 
 export default {
   name: "confirmScreen",
@@ -66,17 +77,24 @@ export default {
         loop: true,
         pagination: {
           el: ".swiper-pagination",
-          clickable: true
+          clickable: true,
+          renderBullet: function (index, className) {
+            return '<span class="' + className + '" style="color: red; background:url(' + this.uploadedImageURL + ')  );">あ</span>'; //そもそもthis.何ちゃらでdataを参照できないのか？
+          },
         },
-        navigation: {
+        /* navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
-        },
+        }, */
         autoplay: {
-          delay: 2500,
+          delay: this.delayTime,
           disableOnInteraction: false
         }
-      }
+      },
+      activeColor: "pink",
+      msg: "テストだよん",
+      delayTime: 100,
+      uploadedImageURL: "ふふふ",
     };
   },
   components: {
@@ -86,6 +104,7 @@ export default {
     subImage3Confirm,
     subImage4Confirm,
     subImage5Confirm,
+    mainImageThumbnail,
     swiper,
     swiperSlide
   },
@@ -103,7 +122,12 @@ export default {
       "stock",
       "detail",
       "seibun"
-    ])
+    ]),
+    ...mapState('Image1', ['uploadedImage']),
+  },
+  beforeCreate () {
+    this.uploadedImageURL = mapState('Image1', ['uploadedImage']) //代入されない・・・何でだ・・・
+    console.log(this.uploadedImageURL)
   }
 };
 </script>

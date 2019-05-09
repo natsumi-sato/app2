@@ -47,58 +47,44 @@ const PropertyStore = {
   mutations: {
     setItemName(state, payload) {
       state.itemName = payload
-      console.log(state.itemName)
     },
     setListPrice(state, payload) {
       state.listPrice = payload
-      console.log(state.listPrice)
     },
     setSellPrice(state, payload) {
       state.sellPrice = payload
-      console.log(state.sellPrice)
     },
     setBrand(state, payload) {
       state.brand = payload
-      console.log(state.brand)
     },
     setCategory(state, payload) {
       state.category = payload
-      console.log(state.category)
     },
     setColor(state, payload) {
       state.color = payload
-      console.log(state.color)
     },
     setPostage(state, payload) {
       state.postage = payload
-      console.log(state.postage)
     },
     setPoint(state, payload) {
       state.point = payload
-      console.log(state.point)
     },
     setImportFlag(state, payload) {
       state.importFlag = payload
-      console.log(state.importFlag)
     },
     setStock(state, payload) {
       state.stock = payload
-      console.log(state.stock)
     },
     setDetail(state, payload) {
       state.detail = payload
-      console.log(state.detail)
     },
     setSeibun(state, payload) {
       state.seibun = payload
-      console.log(state.seibun)
     },
     axiosBrandsJSON(state, payload) {
-      console.log(payload)
       state.brandsJSON = payload
     },
     axiosCategorysJSON(state, payload) {
-      console.log(payload)
       state.categorysJSON = payload
     },
   },
@@ -192,22 +178,18 @@ const Image = {
   mutations: {
     // アップロードした画像を表示
     createImage(state, payload) {
-      console.log(state)
-      console.log(payload)
       let reader = new FileReader();
       reader.onload = (payload) => {
         state.uploadedImage = payload.target.result;
         console.log(state.uploadedImage)
+        console.log(state.uploadedImage.srcElement.attributes)
       };
       reader.readAsDataURL(payload);
     },
   },
   actions: {
     onFileChange(context, payload) {
-      console.log(context)
-      console.log(payload)
       let files = payload.target.files || payload.dataTransfer.files;
-      console.log(files[0])
       //this.createImage(files[0]);
       context.commit('createImage', files[0])
     },
