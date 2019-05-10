@@ -3,21 +3,22 @@
     <p>{{ msg }}</p>
 
     <div class="wrap">
-      <swiper :options="swiperOption">
-        <swiper-slide><mainImageConfirm/></swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 4</swiper-slide>
-        <swiper-slide>Slide 5</swiper-slide>
-        <swiper-slide>Slide 6</swiper-slide>
-        <swiper-slide>Slide 7</swiper-slide>
-        <swiper-slide>Slide 8</swiper-slide>
-        <swiper-slide>Slide 9</swiper-slide>
-        <swiper-slide>Slide 10</swiper-slide>
-        
-        <div class="swiper-pagination" slot="pagination"></div>
-        <!-- <div class="swiper-button-prev" slot="button-prev"></div>
-        <div class="swiper-button-next" slot="button-next"></div>-->
+      <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
+        <swiper-slide class="slide-1" v-bind:style="{ color: activeColor, backgroundImage: 'url(' + uploadedImage + ')' }">1</swiper-slide>
+        <swiper-slide class="slide-2">2</swiper-slide>
+        <swiper-slide class="slide-3">3</swiper-slide>
+        <swiper-slide class="slide-4">4</swiper-slide>
+        <swiper-slide class="slide-5">5</swiper-slide>
+        <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
+        <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
+      </swiper>
+      <!-- swiper2 Thumbs -->
+      <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
+        <swiper-slide class="slide-1" v-bind:style="{ color: activeColor, backgroundImage: 'url(' + uploadedImage + ')' }">1</swiper-slide>
+        <swiper-slide class="slide-2">2</swiper-slide>
+        <swiper-slide class="slide-3">3</swiper-slide>
+        <swiper-slide class="slide-4">4</swiper-slide>
+        <swiper-slide class="slide-5">5</swiper-slide>
       </swiper>
     </div>
 
@@ -71,26 +72,25 @@ export default {
   name: "confirmScreen",
   data() {
     return {
-      swiperOption: {
-        slidesPerView: 1,
-        spaceBetween: 30,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-          renderBullet: function (index, className) {
-            return '<span class="' + className + '" style="color: red; background:url(' + this.uploadedImageURL + ')  );">あ</span>'; //そもそもthis.何ちゃらでdataを参照できないのか？
-          },
+      swiperOptionTop: {
+          spaceBetween: 10,
+          loop: true,
+          loopedSlides: 5, //looped slides should be the same
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
         },
-        /* navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }, */
-        autoplay: {
-          delay: this.delayTime,
-          disableOnInteraction: false
-        }
-      },
+        swiperOptionThumbs: {
+          spaceBetween: 10,
+          slidesPerView: 4,
+          touchRatio: 0.2,
+          loop: true,
+          loopedSlides: 5, //looped slides should be the same
+          slideToClickedSlide: true,
+          autoplayDisableOnInteraction: false,
+          centeredSlides: true,
+        },
       activeColor: "pink",
       msg: "テストだよん",
       delayTime: 100,
@@ -125,10 +125,14 @@ export default {
     ]),
     ...mapState('Image1', ['uploadedImage']),
   },
-  beforeCreate () {
-    this.uploadedImageURL = mapState('Image1', ['uploadedImage']) //代入されない・・・何でだ・・・
-    console.log(this.uploadedImageURL)
-  }
+  mounted() {
+      this.$nextTick(() => {
+        const swiperTop = this.$refs.swiperTop.swiper
+        const swiperThumbs = this.$refs.swiperThumbs.swiper
+        swiperTop.controller.control = swiperThumbs
+        swiperThumbs.controller.control = swiperTop
+      })
+    }
 };
 </script>
 
@@ -159,4 +163,7 @@ export default {
         -ms-flex-align: center
         -webkit-align-items: center
         align-items: center
+  .gallery-thumbs
+    height: 20%
+        box-sizing: border-box
 </style>
