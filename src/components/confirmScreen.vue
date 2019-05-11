@@ -4,46 +4,16 @@
 
     <div class="wrap">
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide class="slide-1" v-bind:style="{backgroundImage: 'url(' +  + ')' }">
-          あ
-        </swiper-slide>
-        <swiper-slide class="slide-2">
-          い
-        </swiper-slide>
-        <swiper-slide class="slide-3">
-          う
-        </swiper-slide>
-        <swiper-slide class="slide-4">
-          え
-        </swiper-slide>
-        <swiper-slide class="slide-5">
-          お
-        </swiper-slide>
-        <swiper-slide class="slide-6">
-          か
+        <swiper-slide v-for="(item, index) in uploadedImage" :class="['slide-' + (index+1)]" :key="index">
+          <img v-if="item" :src="item" />
         </swiper-slide>
         <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
         <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
       </swiper>
       <!-- swiper2 Thumbs -->
       <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-        <swiper-slide class="slide-1" v-bind:style="{backgroundImage: 'url(' +  + ')' }">
-          １
-        </swiper-slide>
-        <swiper-slide class="slide-2">
-          ２
-        </swiper-slide>
-        <swiper-slide class="slide-3">
-          ３
-        </swiper-slide>
-        <swiper-slide class="slide-4">
-          ４
-        </swiper-slide>
-        <swiper-slide class="slide-5">
-          ５
-        </swiper-slide>
-        <swiper-slide class="slide-5">
-          ６
+        <swiper-slide class="slide-1" v-for="(item, index) in uploadedImage" :class="['slide-' + (index+1)]" :key="index">
+          <img v-if="item" :src="item" />
         </swiper-slide>
       </swiper>
     </div>
@@ -61,20 +31,18 @@
     <div class="stock">{{ stock }}</div>
     <div class="detail">{{ detail }}</div>
     <div class="seibun">{{ seibun }}</div>
-    <mainImageConfirm/>
+    <!-- <mainImageConfirm/>
     <subImage1Confirm/>
     <subImage2Confirm/>
     <subImage3Confirm/>
     <subImage4Confirm/>
-    <subImage5Confirm/>
+    <subImage5Confirm/> -->
     <br>
     <router-link to="/" tag="button">戻って修正</router-link>
     <hr>
-    <img v-if="uploadedImage" :src="uploadedImage">
     {{uploadedImage}}
     {{msg}}
-    {{uploadedImageURL}}
-    <div v-bind:style="{ color: activeColor, backgroundImage: 'url(' + uploadedImage + ')' }">あああ</div>
+    <div :style="{ color: activeColor, backgroundImage: 'url(' + uploadedImage + ')' }">あああ</div>
   </div>
 </template>
 
@@ -109,7 +77,7 @@ export default {
       swiperOptionThumbs: {
         spaceBetween: 10,
         freeMode: true,
-        slidesPerView: 10,
+        slidesPerView: 6,
         touchRatio: 0.2,
         loop: false,
         loopedSlides: 5, //looped slides should be the same
@@ -125,13 +93,12 @@ export default {
     };
   },
   components: {
-    mainImageConfirm,
+    /* mainImageConfirm,
     subImage1Confirm,
     subImage2Confirm,
     subImage3Confirm,
     subImage4Confirm,
-    subImage5Confirm,
-    mainImageThumbnail,
+    subImage5Confirm, */
     swiper,
     swiperSlide
   },
@@ -150,7 +117,7 @@ export default {
       "detail",
       "seibun"
     ]),
-    ...mapState("Image1", ["uploadedImage"])
+    ...mapState("Image", ["uploadedImage"])
   },
   mounted() {
     this.$nextTick(() => {

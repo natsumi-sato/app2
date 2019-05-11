@@ -19,8 +19,8 @@
     </div>
     <div class="form-group">
       <p>画像をクリックすると削除します。</p>
-      <ul id="example-1">
-        <li v-for="item in uploadedImage"><img @click="deleteImage" v-show="item" :src="item" /></li>
+      <ul>
+        <li v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index"><img @click="deleteImage" v-if="item" :src="item" /></li>
       </ul>
     </div>
   </div>
@@ -40,12 +40,12 @@ import importFlag from "@/components/modules/importFlag.vue";
 import stock from "@/components/modules/stock.vue";
 import detail from "@/components/modules/detail.vue";
 import seibun from "@/components/modules/seibun.vue";
-import mainImage from "@/components/modules/mainImage.vue";
+/* import mainImage from "@/components/modules/mainImage.vue";
 import subImage1 from "@/components/modules/subImage1.vue";
 import subImage2 from "@/components/modules/subImage2.vue";
 import subImage3 from "@/components/modules/subImage3.vue";
 import subImage4 from "@/components/modules/subImage4.vue";
-import subImage5 from "@/components/modules/subImage5.vue";
+import subImage5 from "@/components/modules/subImage5.vue"; */
 import confirm from "@/components/modules/confirm.vue";
 
 import { mapState, mapGetters } from "vuex";
@@ -71,12 +71,12 @@ export default {
     stock,
     detail,
     seibun,
-    mainImage,
+    /* mainImage,
     subImage1,
     subImage2,
     subImage3,
     subImage4,
-    subImage5,
+    subImage5, */
     confirm
   },
   computed: {
