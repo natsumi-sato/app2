@@ -4,31 +4,47 @@
 
     <div class="wrap">
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide
-          class="slide-1"
-          v-bind:style="{ color: activeColor, backgroundImage: 'url(' +  + ')' }"
-        >
-          <mainImageConfirm/>a
+        <swiper-slide class="slide-1" v-bind:style="{backgroundImage: 'url(' +  + ')' }">
+          あ
         </swiper-slide>
-        <swiper-slide class="slide-2">2</swiper-slide>
-        <swiper-slide class="slide-3">3</swiper-slide>
-        <swiper-slide class="slide-4">4</swiper-slide>
-        <swiper-slide class="slide-5">5</swiper-slide>
+        <swiper-slide class="slide-2">
+          い
+        </swiper-slide>
+        <swiper-slide class="slide-3">
+          う
+        </swiper-slide>
+        <swiper-slide class="slide-4">
+          え
+        </swiper-slide>
+        <swiper-slide class="slide-5">
+          お
+        </swiper-slide>
+        <swiper-slide class="slide-6">
+          か
+        </swiper-slide>
         <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
         <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
       </swiper>
       <!-- swiper2 Thumbs -->
       <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-        <swiper-slide
-          class="slide-1"
-          v-bind:style="{ color: activeColor, backgroundImage: 'url(' +  + ')' }"
-        >
-          <mainImageConfirm/>a
+        <swiper-slide class="slide-1" v-bind:style="{backgroundImage: 'url(' +  + ')' }">
+          １
         </swiper-slide>
-        <swiper-slide class="slide-2">2</swiper-slide>
-        <swiper-slide class="slide-3">3</swiper-slide>
-        <swiper-slide class="slide-4">4</swiper-slide>
-        <swiper-slide class="slide-5">5</swiper-slide>
+        <swiper-slide class="slide-2">
+          ２
+        </swiper-slide>
+        <swiper-slide class="slide-3">
+          ３
+        </swiper-slide>
+        <swiper-slide class="slide-4">
+          ４
+        </swiper-slide>
+        <swiper-slide class="slide-5">
+          ５
+        </swiper-slide>
+        <swiper-slide class="slide-5">
+          ６
+        </swiper-slide>
       </swiper>
     </div>
 
@@ -99,7 +115,8 @@ export default {
         loopedSlides: 5, //looped slides should be the same
         slideToClickedSlide: true,
         autoplayDisableOnInteraction: false,
-        centeredSlides: true
+        centeredSlides: true,
+        virtualTranslate: true,
       },
       activeColor: "pink",
       msg: "テストだよん",
@@ -167,15 +184,23 @@ export default {
         justify-content: center;
         align-items: center;
       }
+      &.gallery-top {
+        .swiper-slide {
+          color: blue;
+          img {
+            max-width: 500px;
+          }
+        }
+      }
       &.gallery-thumbs {
         height: 20%;
         margin: auto;
         box-sizing: border-box;
-        .swiper-wrapper {
-          transform: none !important;
-          .swiper-slide {
-            color: blue;
-            height: 100px;
+        .swiper-slide {
+          color: blue;
+          height: 100px;
+          img {
+            max-width: 150px;
           }
         }
       }

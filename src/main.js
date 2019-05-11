@@ -7,7 +7,7 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-window.onload = function () {
+/* window.onload = function () {
   var head = document.head;
   var thumbsTransformNoEl = document.createElement("link");
  
@@ -16,7 +16,7 @@ window.onload = function () {
   thumbsTransformNoEl.href = "./static/css/transform-no.css";
  
   head.appendChild(thumbsTransformNoEl);
-};
+}; */
 
 /* eslint-disable no-new */
 new Vue({
