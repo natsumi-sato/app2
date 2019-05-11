@@ -4,7 +4,10 @@
 
     <div class="wrap">
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide class="slide-1" v-bind:style="{ color: activeColor, backgroundImage: 'url(' + uploadedImage + ')' }">1</swiper-slide>
+        <swiper-slide
+          class="slide-1"
+          v-bind:style="{ color: activeColor, backgroundImage: 'url(' +  + ')' }"
+        ><mainImageConfirm/></swiper-slide>
         <swiper-slide class="slide-2">2</swiper-slide>
         <swiper-slide class="slide-3">3</swiper-slide>
         <swiper-slide class="slide-4">4</swiper-slide>
@@ -14,7 +17,10 @@
       </swiper>
       <!-- swiper2 Thumbs -->
       <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-        <swiper-slide class="slide-1" v-bind:style="{ color: activeColor, backgroundImage: 'url(' + uploadedImage + ')' }">1</swiper-slide>
+        <swiper-slide
+          class="slide-1"
+          v-bind:style="{ color: activeColor, backgroundImage: 'url(' +  + ')' }"
+        ><mainImageConfirm/></swiper-slide>
         <swiper-slide class="slide-2">2</swiper-slide>
         <swiper-slide class="slide-3">3</swiper-slide>
         <swiper-slide class="slide-4">4</swiper-slide>
@@ -44,7 +50,7 @@
     <br>
     <router-link to="/" tag="button">戻って修正</router-link>
     <hr>
-    <img v-if="uploadedImage" :src="uploadedImage" />
+    <img v-if="uploadedImage" :src="uploadedImage">
     {{uploadedImage}}
     {{msg}}
     {{uploadedImageURL}}
@@ -66,35 +72,33 @@ import { mapState } from "vuex";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 
-
-
 export default {
   name: "confirmScreen",
   data() {
     return {
       swiperOptionTop: {
-          spaceBetween: 10,
-          loop: true,
-          loopedSlides: 5, //looped slides should be the same
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
-          }
-        },
-        swiperOptionThumbs: {
-          spaceBetween: 10,
-          slidesPerView: 4,
-          touchRatio: 0.2,
-          loop: true,
-          loopedSlides: 5, //looped slides should be the same
-          slideToClickedSlide: true,
-          autoplayDisableOnInteraction: false,
-          centeredSlides: true,
-        },
+        spaceBetween: 10,
+        loop: false,
+        loopedSlides: 5, //looped slides should be the same
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      },
+      swiperOptionThumbs: {
+        spaceBetween: 10,
+        slidesPerView: 10,
+        touchRatio: 0.2,
+        loop: false,
+        loopedSlides: 5, //looped slides should be the same
+        slideToClickedSlide: true,
+        autoplayDisableOnInteraction: false,
+        centeredSlides: true
+      },
       activeColor: "pink",
       msg: "テストだよん",
       delayTime: 100,
-      uploadedImageURL: "ふふふ",
+      uploadedImageURL: "ふふふ"
     };
   },
   components: {
@@ -123,47 +127,50 @@ export default {
       "detail",
       "seibun"
     ]),
-    ...mapState('Image1', ['uploadedImage']),
+    ...mapState("Image1", ["uploadedImage"])
   },
   mounted() {
-      this.$nextTick(() => {
-        const swiperTop = this.$refs.swiperTop.swiper
-        const swiperThumbs = this.$refs.swiperThumbs.swiper
-        swiperTop.controller.control = swiperThumbs
-        swiperThumbs.controller.control = swiperTop
-      })
-    }
+    this.$nextTick(() => {
+      const swiperTop = this.$refs.swiperTop.swiper;
+      const swiperThumbs = this.$refs.swiperThumbs.swiper;
+      swiperTop.controller.control = swiperThumbs;
+      swiperThumbs.controller.control = swiperTop;
+    });
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="sass">
-.comfirmWrap
-  img 
-    max-width: 100px
-  .swiper-container
-      width: 100%
-      height: 100%
-      margin-left: auto
-      margin-right: auto
-      .swiper-slide
-        text-align: center
-        font-size: 18px
-        background: #fff
-        /* Center slide text vertically */
-        display: -webkit-box
-        display: -ms-flexbox
-        display: -webkit-flex
-        display: flex
-        -webkit-box-pack: center
-        -ms-flex-pack: center
-        -webkit-justify-content: center
-        justify-content: center
-        -webkit-box-align: center
-        -ms-flex-align: center
-        -webkit-align-items: center
-        align-items: center
-  .gallery-thumbs
-    height: 20%
-        box-sizing: border-box
+<style scoped lang="scss">
+.comfirmWrap {
+  img {
+    max-width: 100px;
+  }
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &.gallery-thumbs {
+      height: 20%;
+      margin: auto;
+      box-sizing: border-box;
+      .swiper-wrapper {
+        margin-left: calc(-37.5% - 5px);
+        .swiper-slide {
+          color: blue;
+          height: 100px;
+        }
+      }
+    }
+  }
+}
 </style>
