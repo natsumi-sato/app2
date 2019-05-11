@@ -7,7 +7,9 @@
         <swiper-slide
           class="slide-1"
           v-bind:style="{ color: activeColor, backgroundImage: 'url(' +  + ')' }"
-        ><mainImageConfirm/></swiper-slide>
+        >
+          <mainImageConfirm/>a
+        </swiper-slide>
         <swiper-slide class="slide-2">2</swiper-slide>
         <swiper-slide class="slide-3">3</swiper-slide>
         <swiper-slide class="slide-4">4</swiper-slide>
@@ -20,7 +22,9 @@
         <swiper-slide
           class="slide-1"
           v-bind:style="{ color: activeColor, backgroundImage: 'url(' +  + ')' }"
-        ><mainImageConfirm/></swiper-slide>
+        >
+          <mainImageConfirm/>a
+        </swiper-slide>
         <swiper-slide class="slide-2">2</swiper-slide>
         <swiper-slide class="slide-3">3</swiper-slide>
         <swiper-slide class="slide-4">4</swiper-slide>
@@ -83,10 +87,12 @@ export default {
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
-        }
+        },
+        effect: "fade"
       },
       swiperOptionThumbs: {
         spaceBetween: 10,
+        freeMode: true,
         slidesPerView: 10,
         touchRatio: 0.2,
         loop: false,
@@ -146,28 +152,31 @@ export default {
   img {
     max-width: 100px;
   }
-  .swiper-container {
-    width: 100%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    &.gallery-thumbs {
-      height: 20%;
-      margin: auto;
-      box-sizing: border-box;
-      .swiper-wrapper {
-        margin-left: calc(-37.5% - 5px);
-        .swiper-slide {
-          color: blue;
-          height: 100px;
+  .wrap {
+    width: 500px;
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &.gallery-thumbs {
+        height: 20%;
+        margin: auto;
+        box-sizing: border-box;
+        .swiper-wrapper {
+          transform: none !important;
+          .swiper-slide {
+            color: blue;
+            height: 100px;
+          }
         }
       }
     }
