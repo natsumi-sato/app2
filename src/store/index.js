@@ -202,11 +202,9 @@ const Image = {
       };
       reader.readAsDataURL(payload);
     },
-    deleteImageNext(state, payload) {
-      console.log(payload);
-      state.uploadedImage = state.uploadedImage.filter(function(deleteItem) {
-        return deleteItem !== payload;
-      });
+    deleteImage(state, index) {
+      console.log("うんこピッピ");
+      state.uploadedImage.splice(index, 1);
     },
     dragUploadedImage(state, payload) {
       state.uploadedImage = payload;
@@ -219,11 +217,7 @@ const Image = {
       //this.createImage(files[0]);
       context.commit("createImage", files[0]);
     },
-    deleteImage(context, payload) {
-      //console.log(payload.srcElement.currentSrc)
-      var imageSrc = payload.srcElement.currentSrc;
-      context.commit("deleteImageNext", imageSrc);
-    }
+    
   }
 };
 

@@ -23,7 +23,7 @@
         <draggable v-model="uploadedImage">
           <li v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
             <img v-if="item" :src="item">
-            <button @click="deleteImage(item)">削除</button>
+            <button @click="deleteImage(index)">削除</button>
           </li>
         </draggable>
       </ul>
@@ -111,7 +111,7 @@ export default {
     deleteImage(e) {
       console.log("こいつを消せ！");
       console.log(e)
-      this.$store.dispatch("Image/deleteImage", e);
+      this.$store.commit("Image/deleteImage", e);
     }
   },
   beforeCreate() {
