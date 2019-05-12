@@ -18,7 +18,7 @@
       <input type="file" v-on:change="uploadedImage1">
     </div>
     <div class="form-group">
-      <p>画像をクリックすると削除します。</p>
+      <p>画像をドラッグアンドドロップすると順番が変わります。</p>
       <ul>
         <draggable v-model="uploadedImage">
           <li v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
@@ -108,10 +108,8 @@ export default {
       console.log(e);
       this.$store.dispatch("Image/onFileChange", e);
     },
-    deleteImage(e) {
-      console.log("こいつを消せ！");
-      console.log(e)
-      this.$store.commit("Image/deleteImage", e);
+    deleteImage(index) {
+      this.$store.commit("Image/deleteImage", index);
     }
   },
   beforeCreate() {

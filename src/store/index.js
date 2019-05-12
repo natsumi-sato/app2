@@ -203,7 +203,6 @@ const Image = {
       reader.readAsDataURL(payload);
     },
     deleteImage(state, index) {
-      console.log("うんこピッピ");
       state.uploadedImage.splice(index, 1);
     },
     dragUploadedImage(state, payload) {
