@@ -20,7 +20,12 @@
     <div class="form-group">
       <p>画像をクリックすると削除します。</p>
       <ul>
-        <li v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index"><img @click="deleteImage" v-if="item" :src="item" /></li>
+        <draggable v-model="uploadedImage">
+          <li v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
+            <img v-if="item" :src="item">
+            <button @click="deleteImage(item)">削除</button>
+          </li>
+        </draggable>
       </ul>
     </div>
   </div>
@@ -49,6 +54,7 @@ import subImage5 from "@/components/modules/subImage5.vue"; */
 import confirm from "@/components/modules/confirm.vue";
 
 import { mapState, mapGetters } from "vuex";
+import draggable from "vuedraggable";
 
 export default {
   name: "editWrap",
@@ -71,16 +77,19 @@ export default {
     stock,
     detail,
     seibun,
-    /* mainImage,
-    subImage1,
-    subImage2,
-    subImage3,
-    subImage4,
-    subImage5, */
-    confirm
+    confirm,
+    draggable
   },
   computed: {
-    ...mapState("Image", ["uploadedImage"])
+    //...mapState("Image", ["uploadedImage"]),
+    uploadedImage: {
+      get() {
+        return this.$store.state.Image.uploadedImage;
+      },
+      set(val) {
+        this.$store.commit("Image/dragUploadedImage", val);
+      }
+    }
   },
   methods: {
     validate: function(event) {
@@ -100,7 +109,8 @@ export default {
       this.$store.dispatch("Image/onFileChange", e);
     },
     deleteImage(e) {
-      console.log("こいつを消せ！")
+      console.log("こいつを消せ！");
+      console.log(e)
       this.$store.dispatch("Image/deleteImage", e);
     }
   },

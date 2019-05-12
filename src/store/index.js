@@ -204,11 +204,12 @@ const Image = {
     },
     deleteImageNext(state, payload) {
       console.log(payload);
-      state.uploadedImage = state.uploadedImage.filter(function( deleteItem ) {
-  
+      state.uploadedImage = state.uploadedImage.filter(function(deleteItem) {
         return deleteItem !== payload;
-        
       });
+    },
+    dragUploadedImage(state, payload) {
+      state.uploadedImage = payload;
     }
   },
   actions: {
@@ -220,8 +221,8 @@ const Image = {
     },
     deleteImage(context, payload) {
       //console.log(payload.srcElement.currentSrc)
-        var imageSrc = payload.srcElement.currentSrc;
-        context.commit("deleteImageNext", imageSrc);
+      var imageSrc = payload.srcElement.currentSrc;
+      context.commit("deleteImageNext", imageSrc);
     }
   }
 };
