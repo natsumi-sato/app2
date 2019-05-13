@@ -27,7 +27,26 @@
           </li>
         </draggable>
       </ul>
+      <draggable v-model="uploadedImage">
+        <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
+          <img v-if="item" :src="item">
+          <button @click="deleteImage(index)">削除</button>
+        </div>
+      </draggable>
     </div>
+    <vue-dropzone
+      ref="myVueDropzone"
+      id="dropzone"
+      :options="dropzoneOptions"
+      :useCustomSlot="true"
+    >
+      <draggable v-model="uploadedImage">
+        <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
+          <img v-if="item" :src="item">
+          <button @click="deleteImage(index)">削除</button>
+        </div>
+      </draggable>
+    </vue-dropzone>
   </div>
 </template>
 
@@ -55,12 +74,21 @@ import confirm from "@/components/modules/confirm.vue";
 
 import { mapState, mapGetters } from "vuex";
 import draggable from "vuedraggable";
+import vue2Dropzone from "vue2-dropzone";
+import "vue2-dropzone/dist/vue2Dropzone.min.css";
 
 export default {
   name: "editWrap",
   data() {
     return {
-      msg: "あああ"
+      msg: "あああ",
+      dropzoneOptions: {
+        url: "https://httpbin.org/post",
+        thumbnailWidth: 150,
+        maxFilesize: 0.5,
+        headers: { "My-Awesome-Header": "header value" },
+        previewTemplate: this.template(),
+      }
     };
   },
   components: {
@@ -78,7 +106,8 @@ export default {
     detail,
     seibun,
     confirm,
-    draggable
+    draggable,
+    vueDropzone: vue2Dropzone
   },
   computed: {
     //...mapState("Image", ["uploadedImage"]),
@@ -110,7 +139,17 @@ export default {
     },
     deleteImage(index) {
       this.$store.commit("Image/deleteImage", index);
-    }
+    },
+    template: function () {
+        return `<draggable v-model="uploadedImage">
+        <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
+          <img v-if="item" :src="item">
+          <button @click="deleteImage(index)">削除</button>
+        </div>
+      </draggable>
+        `;
+        this.$store.commit("Image/deleteImage", index);
+      },
   },
   beforeCreate() {
     this.$store.dispatch("PropertyStore/axiosJSON");
