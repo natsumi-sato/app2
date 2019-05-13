@@ -39,13 +39,14 @@
       id="dropzone"
       :options="dropzoneOptions"
       :useCustomSlot="true"
+      @vdropzone-file-added="thumbnail"
     >
-      <draggable v-model="uploadedImage">
+      <!-- <draggable v-model="uploadedImage">
         <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
           <img v-if="item" :src="item">
           <button @click="deleteImage(index)">削除</button>
         </div>
-      </draggable>
+      </draggable> -->
     </vue-dropzone>
   </div>
 </template>
@@ -87,7 +88,7 @@ export default {
         thumbnailWidth: 150,
         maxFilesize: 0.5,
         headers: { "My-Awesome-Header": "header value" },
-        previewTemplate: this.template(),
+        previewTemplate: this.template()
       }
     };
   },
@@ -140,16 +141,20 @@ export default {
     deleteImage(index) {
       this.$store.commit("Image/deleteImage", index);
     },
-    template: function () {
-        return `<draggable v-model="uploadedImage">
+    template: function() {
+      return `<draggable v-model="uploadedImage">
         <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
           <img v-if="item" :src="item">
           <button @click="deleteImage(index)">削除</button>
         </div>
       </draggable>
         `;
-        this.$store.commit("Image/deleteImage", index);
-      },
+    },
+    thumbnail: function(file) {
+      console.log(file.dataUrl);
+      //console.log(dataUrl);
+      //this.$store.commit("Image/dragImage", dataUrl);
+    },
   },
   beforeCreate() {
     this.$store.dispatch("PropertyStore/axiosJSON");

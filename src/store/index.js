@@ -205,8 +205,8 @@ const Image = {
     deleteImage(state, index) {
       state.uploadedImage.splice(index, 1);
     },
-    dragUploadedImage(state, payload) {
-      state.uploadedImage = payload;
+    dragImage(state, dataUrl) {
+      state.uploadedImage.push(dataUrl);
     }
   },
   actions: {
@@ -215,8 +215,7 @@ const Image = {
       //console.log(payload.target.files);
       //this.createImage(files[0]);
       context.commit("createImage", files[0]);
-    },
-    
+    }
   }
 };
 
