@@ -34,6 +34,7 @@
         </div>
       </draggable>
     </div>
+    <hr>
     <vue-dropzone
       ref="myVueDropzone"
       id="dropzone"
@@ -46,12 +47,21 @@
           <img v-if="item" :src="item">
           <button @click="deleteImage(index)">削除</button>
         </div>
-      </draggable> -->
+      </draggable>-->
     </vue-dropzone>
+    <hr>
+    <div id="example1" class="list-group col" ref="example1">
+      <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
+          <img v-if="item" :src="item">
+          <button @click="deleteImage(index)">削除</button>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
+
+
 import itemName from "@/components/modules/itemName.vue";
 import listPrice from "@/components/modules/listPrice.vue";
 import sellPrice from "@/components/modules/sellPrice.vue";
@@ -77,6 +87,7 @@ import { mapState, mapGetters } from "vuex";
 import draggable from "vuedraggable";
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
+import Sortable from 'sortablejs';
 
 export default {
   name: "editWrap",
@@ -89,7 +100,7 @@ export default {
         maxFilesize: 0.5,
         headers: { "My-Awesome-Header": "header value" },
         previewTemplate: this.template()
-      }
+      },
     };
   },
   components: {
@@ -154,10 +165,19 @@ export default {
       console.log(file.dataUrl);
       //console.log(dataUrl);
       //this.$store.commit("Image/dragImage", dataUrl);
-    },
+    }
   },
   beforeCreate() {
     this.$store.dispatch("PropertyStore/axiosJSON");
+    
+  },
+  mounted() {
+    console.log(Sortable);
+    //console.log(this.$refs.example1)
+    Sortable.create(document.getElementById('example1'), {
+        animation: 150,
+        ghostClass: 'blue-background-class'
+    });
   }
 };
 </script>
