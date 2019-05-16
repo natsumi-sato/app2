@@ -89,7 +89,7 @@ export default {
         return this.$store.state.Image.uploadedImage;
       },
       set(val) {
-        this.$store.commit("Image/dragUploadedImage", val);
+        this.$store.commit("Image/vforUploadedImage", val);
       }
     }
   },
@@ -120,6 +120,10 @@ export default {
   mounted() {
     console.log(Sortable);
     //console.log(this.$refs.example1)
+    let imgArray = [];
+    let imgUrlArray = [];
+    var self = this;
+
     Sortable.create(document.getElementById("example1"), {
       animation: 150,
       ghostClass: "blue-background-class",
@@ -127,19 +131,24 @@ export default {
         //console.log(evt.srcElement.getElementsByTagName('img'));
         //console.log(evt.srcElement.getElementsByTagName('img')[0].src);
 
-        let imgArray = evt.srcElement.getElementsByTagName('img')
+        imgArray = evt.srcElement.getElementsByTagName('img')
         //console.log(imgArray)
-        let imgUrlArray = [];
+        
 
         for(let i = 0; i < imgArray.length; i++) {
           //console.log(imgArray[i]);
           //console.log(imgArray[i].src);
-          imgUrlArray[i] = imgArray[i].src
+          imgUrlArray[i] = imgArray[i].src;
         }
 
-        console.log(imgUrlArray)
+        console.log(imgUrlArray);
+
+        self.$store.commit("Image/sortableImage", imgUrlArray);
       }
     });
+
+    //this.$store.commit("Image/sortableImage", imgUrlArray);
+
   }
 };
 </script>

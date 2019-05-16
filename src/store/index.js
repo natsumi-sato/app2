@@ -205,9 +205,14 @@ const Image = {
     deleteImage(state, index) {
       state.uploadedImage.splice(index, 1);
     },
-    dragUploadedImage(state, dataUrl) {
+    vforUploadedImage(state, dataUrl) {
       state.uploadedImage.push(dataUrl);
-    }
+      },
+      sortableImage(state, imgUrlArray) {
+          state.uploadedImage = imgUrlArray;
+          console.log("うもおおお");
+          console.log(state.uploadedImage);
+      }
   },
   actions: {
     onFileChange(context, payload) {
