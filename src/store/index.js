@@ -205,7 +205,7 @@ const Image = {
     deleteImage(state, index) {
       state.uploadedImage.splice(index, 1);
     },
-    dragImage(state, dataUrl) {
+    dragUploadedImage(state, dataUrl) {
       state.uploadedImage.push(dataUrl);
     }
   },

@@ -19,49 +19,19 @@
     </div>
     <div class="form-group">
       <p>画像をドラッグアンドドロップすると順番が変わります。</p>
-      <ul>
-        <draggable v-model="uploadedImage">
-          <li v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
-            <img v-if="item" :src="item">
-            <button @click="deleteImage(index)">削除</button>
-          </li>
-        </draggable>
-      </ul>
-      <draggable v-model="uploadedImage">
-        <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
-          <img v-if="item" :src="item">
-          <button @click="deleteImage(index)">削除</button>
-        </div>
-      </draggable>
     </div>
     <hr>
-    <vue-dropzone
-      ref="myVueDropzone"
-      id="dropzone"
-      :options="dropzoneOptions"
-      :useCustomSlot="true"
-      @vdropzone-file-added="thumbnail"
-    >
-      <!-- <draggable v-model="uploadedImage">
-        <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
-          <img v-if="item" :src="item">
-          <button @click="deleteImage(index)">削除</button>
-        </div>
-      </draggable>-->
-    </vue-dropzone>
-    <hr>
-    <div id="example1" class="list-group col" ref="example1">
+    <div id="example1" class="list-group col">
       <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
-          <img v-if="item" :src="item">
-          <button @click="deleteImage(index)">削除</button>
-        </div>
+        <img v-if="item" :src="item" :id=" 'image' + (index + 1)">
+        <button @click="deleteImage(index)">削除</button>
+      </div>
     </div>
+    <p>{{uploadedImage}}</p>
   </div>
 </template>
 
 <script>
-
-
 import itemName from "@/components/modules/itemName.vue";
 import listPrice from "@/components/modules/listPrice.vue";
 import sellPrice from "@/components/modules/sellPrice.vue";
@@ -87,20 +57,13 @@ import { mapState, mapGetters } from "vuex";
 import draggable from "vuedraggable";
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
-import Sortable from 'sortablejs';
+import Sortable from "sortablejs";
 
 export default {
   name: "editWrap",
   data() {
     return {
-      msg: "あああ",
-      dropzoneOptions: {
-        url: "https://httpbin.org/post",
-        thumbnailWidth: 150,
-        maxFilesize: 0.5,
-        headers: { "My-Awesome-Header": "header value" },
-        previewTemplate: this.template()
-      },
+      msg: "あああ"
     };
   },
   components: {
@@ -117,9 +80,7 @@ export default {
     stock,
     detail,
     seibun,
-    confirm,
-    draggable,
-    vueDropzone: vue2Dropzone
+    confirm
   },
   computed: {
     //...mapState("Image", ["uploadedImage"]),
@@ -151,32 +112,33 @@ export default {
     },
     deleteImage(index) {
       this.$store.commit("Image/deleteImage", index);
-    },
-    template: function() {
-      return `<draggable v-model="uploadedImage">
-        <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
-          <img v-if="item" :src="item">
-          <button @click="deleteImage(index)">削除</button>
-        </div>
-      </draggable>
-        `;
-    },
-    thumbnail: function(file) {
-      console.log(file.dataUrl);
-      //console.log(dataUrl);
-      //this.$store.commit("Image/dragImage", dataUrl);
     }
   },
   beforeCreate() {
     this.$store.dispatch("PropertyStore/axiosJSON");
-    
   },
   mounted() {
     console.log(Sortable);
     //console.log(this.$refs.example1)
-    Sortable.create(document.getElementById('example1'), {
-        animation: 150,
-        ghostClass: 'blue-background-class'
+    Sortable.create(document.getElementById("example1"), {
+      animation: 150,
+      ghostClass: "blue-background-class",
+      onUpdate: function(evt) {
+        //console.log(evt.srcElement.getElementsByTagName('img'));
+        //console.log(evt.srcElement.getElementsByTagName('img')[0].src);
+
+        let imgArray = evt.srcElement.getElementsByTagName('img')
+        //console.log(imgArray)
+        let imgUrlArray = [];
+
+        for(let i = 0; i < imgArray.length; i++) {
+          //console.log(imgArray[i]);
+          //console.log(imgArray[i].src);
+          imgUrlArray[i] = imgArray[i].src
+        }
+
+        console.log(imgUrlArray)
+      }
     });
   }
 };
