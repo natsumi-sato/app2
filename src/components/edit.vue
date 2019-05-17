@@ -21,13 +21,17 @@
       <p>画像をドラッグアンドドロップすると順番が変わります。</p>
     </div>
     <hr>
-    <div id="example1" class="list-group col">
+    <div id="example1" class="list-group col" ref="dzFilePreview">
       <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
-        <img v-if="item" :src="item" :id=" 'image' + (index + 1)">
+        <img data-dz-thumbnail v-if="item" :src="item" :id=" 'image' + (index + 1)">
         <button @click="deleteImage(index)">削除</button>
       </div>
     </div>
     <p>{{uploadedImage}}</p>
+    <hr>
+    <form action="/file-upload" class="dropzone" id="example2">
+      
+    </form>
   </div>
 </template>
 
@@ -54,10 +58,10 @@ import subImage5 from "@/components/modules/subImage5.vue"; */
 import confirm from "@/components/modules/confirm.vue";
 
 import { mapState, mapGetters } from "vuex";
-import draggable from "vuedraggable";
-import vue2Dropzone from "vue2-dropzone";
-import "vue2-dropzone/dist/vue2Dropzone.min.css";
 import Sortable from "sortablejs";
+import Dropzone from "dropzone";
+import "dropzone/dist/basic.css";
+import "dropzone/dist/dropzone.css";
 
 export default {
   name: "editWrap",
@@ -118,37 +122,37 @@ export default {
     this.$store.dispatch("PropertyStore/axiosJSON");
   },
   mounted() {
-    console.log(Sortable);
-    //console.log(this.$refs.example1)
+    console.log(Dropzone);
+
     let imgArray = [];
     let imgUrlArray = [];
     var self = this;
 
-    Sortable.create(document.getElementById("example1"), {
+    Sortable.create(document.getElementById("example2"), {
       animation: 150,
       ghostClass: "blue-background-class",
       onUpdate: function(evt) {
-        //console.log(evt.srcElement.getElementsByTagName('img'));
-        //console.log(evt.srcElement.getElementsByTagName('img')[0].src);
+        imgArray = evt.srcElement.getElementsByTagName("img");
 
-        imgArray = evt.srcElement.getElementsByTagName('img')
-        //console.log(imgArray)
-        
-
-        for(let i = 0; i < imgArray.length; i++) {
-          //console.log(imgArray[i]);
-          //console.log(imgArray[i].src);
+        for (let i = 0; i < imgArray.length; i++) {
           imgUrlArray[i] = imgArray[i].src;
         }
-
-        console.log(imgUrlArray);
 
         self.$store.commit("Image/sortableImage", imgUrlArray);
       }
     });
 
-    //this.$store.commit("Image/sortableImage", imgUrlArray);
-
+    Dropzone.options.myAwesomeDropzone = {
+      paramName: "file", // The name that will be used to transfer the file
+      maxFilesize: 2, // MB
+      accept: function(file, done) {
+        if (file.name == "justinbieber.jpg") {
+          done("Naha, you don't.");
+        } else {
+          done();
+        }
+      },
+    };
   }
 };
 </script>

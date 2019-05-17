@@ -210,8 +210,6 @@ const Image = {
       },
       sortableImage(state, imgUrlArray) {
           state.uploadedImage = imgUrlArray;
-          console.log("うもおおお");
-          console.log(state.uploadedImage);
       }
   },
   actions: {

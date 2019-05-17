@@ -56,7 +56,6 @@ export default {
           var brands = [];
         }
       }
-      this.msg = this.brandsJSON
       return brands;
     }
   },
