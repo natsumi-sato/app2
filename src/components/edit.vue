@@ -21,17 +21,20 @@
       <p>画像をドラッグアンドドロップすると順番が変わります。</p>
     </div>
     <hr>
-    <div id="example1" class="list-group col" ref="dzFilePreview">
-      <div v-for="(item, index) in uploadedImage" :class="['img-' + (index+1)]" :key="index">
+    <div id="example1" class="list-group col">
+      <div
+        v-for="(item, index) in uploadedImage"
+        :class="['img-' + (index+1)]"
+        :key="index"
+        ref="dzFilePreview"
+      >
         <img data-dz-thumbnail v-if="item" :src="item" :id=" 'image' + (index + 1)">
         <button @click="deleteImage(index)">削除</button>
       </div>
     </div>
     <p>{{uploadedImage}}</p>
     <hr>
-    <form action="/file-upload" class="dropzone" id="example2">
-      
-    </form>
+    <form action="/file-upload" class="dropzone" id="myAwesomeDropzone"></form>
   </div>
 </template>
 
@@ -128,7 +131,7 @@ export default {
     let imgUrlArray = [];
     var self = this;
 
-    Sortable.create(document.getElementById("example2"), {
+    Sortable.create(document.getElementById("myAwesomeDropzone"), {
       animation: 150,
       ghostClass: "blue-background-class",
       onUpdate: function(evt) {
@@ -144,7 +147,13 @@ export default {
 
     Dropzone.options.myAwesomeDropzone = {
       paramName: "file", // The name that will be used to transfer the file
-      maxFilesize: 2, // MB
+      maxFilesize: 1000, // MB
+      thumbnailWidth: 188,
+      thumbnailHeight: null,
+      addRemoveLinks: true,
+      dictRemoveFile: "削除",
+      dictRemoveFileConfirmation: "ファイルを本当に削除しますか？",
+      //resizeMimeType: 'image/jpeg',
       accept: function(file, done) {
         if (file.name == "justinbieber.jpg") {
           done("Naha, you don't.");
@@ -152,11 +161,49 @@ export default {
           done();
         }
       },
+      init: function() {
+        /* this.on("thumbnail", function(file, dataUrl) {
+          console.log(file);
+          console.log(dataUrl);
+        }); */
+        var addImage = this;
+
+        
+
+        addImage.on("addedfile", function(file) {
+          console.log(file);
+          var dataUri;
+          var fileReader = new FileReader();
+          fileReader.onload = function() {
+              // Data URIを取得
+              dataUri = this.result;
+
+              // img要素に表示
+              //var img = document.getElementsByTagName("img");
+              //img.src = dataUri;
+              console.log(dataUri); //ここはちゃんとdataUriの値が入ってるのになあ・・・。
+
+              //なんかここでcommitするとバグる・・・・なぜ・・・。
+              //self.$store.commit("Image/sortableImage", dataUri);
+          }
+
+          // ファイルをData URIとして読み込む
+          fileReader.readAsDataURL(file);
+          console.log("うう"+dataUri); //ここのdataUriがundefined・・・代入されてない・・？。
+
+          self.$store.commit("Image/sortableImage", dataUri); //dataUriが入ってないからstoreのstateに代入されない・・・。
+
+        });
+      }
     };
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+/* .dropzone .dz-preview .dz-image {
+  width: fit-content !important;
+  height: fit-content !important;
+} */
 </style>
