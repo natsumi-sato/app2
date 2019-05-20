@@ -168,30 +168,20 @@ export default {
         }); */
         var addImage = this;
 
-        
-
         addImage.on("addedfile", function(file) {
           console.log(file);
           var dataUri;
           var fileReader = new FileReader();
+          
           fileReader.onload = function() {
               // Data URIを取得
-              dataUri = this.result;
-
-              // img要素に表示
-              //var img = document.getElementsByTagName("img");
-              //img.src = dataUri;
-              console.log(dataUri); //ここはちゃんとdataUriの値が入ってるのになあ・・・。
-
-              //なんかここでcommitするとバグる・・・・なぜ・・・。
-              //self.$store.commit("Image/sortableImage", dataUri);
+              dataUri = this.result;              
+              
+              self.$store.commit("Image/vforUploadedImage", dataUri);
           }
 
           // ファイルをData URIとして読み込む
-          fileReader.readAsDataURL(file);
-          console.log("うう"+dataUri); //ここのdataUriがundefined・・・代入されてない・・？。
-
-          self.$store.commit("Image/sortableImage", dataUri); //dataUriが入ってないからstoreのstateに代入されない・・・。
+          fileReader.readAsDataURL(file);          
 
         });
       }
