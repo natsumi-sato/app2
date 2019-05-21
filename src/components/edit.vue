@@ -21,7 +21,7 @@
       <p>画像をドラッグアンドドロップすると順番が変わります。</p>
     </div>
     <hr>
-    <div id="example1" class="list-group col">
+    <!-- <div id="example1" class="list-group col">
       <div
         v-for="(item, index) in uploadedImage"
         :class="['img-' + (index+1)]"
@@ -31,10 +31,22 @@
         <img data-dz-thumbnail v-if="item" :src="item" :id=" 'image' + (index + 1)">
         <button @click="deleteImage(index)">削除</button>
       </div>
-    </div>
+    </div> -->
     <p>{{uploadedImage}}</p>
     <hr>
-    <div action="/file-upload" class="dropzone" id="myAwesomeDropzone"></div>
+    <div action="/file-upload" class="dropzone" id="myAwesomeDropzone">
+      <div id="example1" class="list-group col">
+        <div
+          v-for="(item, index) in uploadedImage"
+          :class="['img-' + (index+1)]"
+          :key="index"
+          ref="dzFilePreview"
+        >
+          <img data-dz-thumbnail v-if="item" :src="item" :id=" 'image' + (index + 1)">
+          <button @click="deleteImage(index)">削除</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -131,7 +143,7 @@ export default {
     let imgUrlArray = [];
     var self = this;
 
-    Sortable.create(document.getElementById("myAwesomeDropzone"), {
+    Sortable.create(document.getElementById("example1"), {
       animation: 150,
       ghostClass: "blue-background-class",
       onUpdate: function(evt) {
@@ -144,23 +156,23 @@ export default {
         self.$store.commit("Image/sortableImage", imgUrlArray);
       }
     });
-    
+
     Dropzone.autoDiscover = false;
     Dropzone.options.imageDropArea = {
       paramName: "file", // The name that will be used to transfer the file
-      parallelUploads: 1,        // 1度に何ファイルずつアップロードするか
-      acceptedFiles: 'image/*',  // 画像だけアップロードしたい場合
-      dictDefaultMessage: 'ファイルをドラッグ&ドロップしてください(複数可)',
+      parallelUploads: 1, // 1度に何ファイルずつアップロードするか
+      acceptedFiles: "image/*", // 画像だけアップロードしたい場合
+      dictDefaultMessage: "ファイルをドラッグ&ドロップしてください(複数可)"
     };
-    let dropzone = new Dropzone('div#myAwesomeDropzone', {
-      url: 'https://httpbin.org/post'
+    let dropzone = new Dropzone("div#myAwesomeDropzone", {
+      url: "https://httpbin.org/post"
     });
-    dropzone.on('addedfile', function(file) {
+    dropzone.on("addedfile", function(file) {
       var fileReader = new FileReader();
-      fileReader.onload = function () {
+      fileReader.onload = function() {
         var dataUri = this.result;
 
-        //file.previewElement.remove();
+        file.previewElement.remove();
         self.$store.commit("Image/vforUploadedImage", dataUri);
       };
       fileReader.readAsDataURL(file);
