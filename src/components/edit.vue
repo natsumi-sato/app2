@@ -34,7 +34,7 @@
     </div>
     <p>{{uploadedImage}}</p>
     <hr>
-    <form action="/file-upload" class="dropzone" id="myAwesomeDropzone"></form>
+    <div action="/file-upload" class="dropzone" id="myAwesomeDropzone"></div>
   </div>
 </template>
 
@@ -144,48 +144,27 @@ export default {
         self.$store.commit("Image/sortableImage", imgUrlArray);
       }
     });
-
-    Dropzone.options.myAwesomeDropzone = {
+    
+    Dropzone.autoDiscover = false;
+    Dropzone.options.imageDropArea = {
       paramName: "file", // The name that will be used to transfer the file
-      maxFilesize: 1000, // MB
-      thumbnailWidth: 188,
-      thumbnailHeight: null,
-      addRemoveLinks: true,
-      dictRemoveFile: "削除",
-      dictRemoveFileConfirmation: "ファイルを本当に削除しますか？",
-      //resizeMimeType: 'image/jpeg',
-      accept: function(file, done) {
-        if (file.name == "justinbieber.jpg") {
-          done("Naha, you don't.");
-        } else {
-          done();
-        }
-      },
-      init: function() {
-        /* this.on("thumbnail", function(file, dataUrl) {
-          console.log(file);
-          console.log(dataUrl);
-        }); */
-        var addImage = this;
-
-        addImage.on("addedfile", function(file) {
-          console.log(file);
-          var dataUri;
-          var fileReader = new FileReader();
-          
-          fileReader.onload = function() {
-              // Data URIを取得
-              dataUri = this.result;              
-              
-              self.$store.commit("Image/vforUploadedImage", dataUri);
-          }
-
-          // ファイルをData URIとして読み込む
-          fileReader.readAsDataURL(file);          
-
-        });
-      }
+      parallelUploads: 1,        // 1度に何ファイルずつアップロードするか
+      acceptedFiles: 'image/*',  // 画像だけアップロードしたい場合
+      dictDefaultMessage: 'ファイルをドラッグ&ドロップしてください(複数可)',
     };
+    let dropzone = new Dropzone('div#myAwesomeDropzone', {
+      url: 'https://httpbin.org/post'
+    });
+    dropzone.on('addedfile', function(file) {
+      var fileReader = new FileReader();
+      fileReader.onload = function () {
+        var dataUri = this.result;
+
+        //file.previewElement.remove();
+        self.$store.commit("Image/vforUploadedImage", dataUri);
+      };
+      fileReader.readAsDataURL(file);
+    });
   }
 };
 </script>
