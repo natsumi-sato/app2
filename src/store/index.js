@@ -5,17 +5,6 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
-const Edit = {
-  namespaced: true,
-  state: {},
-  mutations: {},
-  actions: {
-    buttonAction({ commit, state, rootState }) {
-      console.log("buttonAction");
-    }
-  }
-};
-
 const PropertyStore = {
   namespaced: true,
   state() {
@@ -90,7 +79,6 @@ const PropertyStore = {
   },
   actions: {
     buttonAction({ commit, state, rootState }) {
-      console.log(state.itemName);
 
       //商品名
       if (state.itemName.length >= 3) {
@@ -150,7 +138,6 @@ const PropertyStore = {
         state.categoryValidation == 0 &&
         state.pointValidation == 0
       ) {
-        console.log("プッシュ！");
         router.push("/confirm");
       }
     },
@@ -197,8 +184,6 @@ const Image = {
         }
 
         state.uploadedImage.push(payload.target.result);
-        console.log(state.uploadedImage);
-        //console.log(state.uploadedImage.srcElement.attributes)
       };
       reader.readAsDataURL(payload);
     },
@@ -215,8 +200,6 @@ const Image = {
   actions: {
     onFileChange(context, payload) {
       let files = payload.target.files || payload.dataTransfer.files;
-      //console.log(payload.target.files);
-      //this.createImage(files[0]);
       context.commit("createImage", files[0]);
     }
   }
@@ -224,7 +207,6 @@ const Image = {
 
 export default new Vuex.Store({
   modules: {
-    Edit,
     PropertyStore,
     Image
   }

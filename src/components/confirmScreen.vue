@@ -31,12 +31,6 @@
     <div class="stock">{{ stock }}</div>
     <div class="detail">{{ detail }}</div>
     <div class="seibun">{{ seibun }}</div>
-    <!-- <mainImageConfirm/>
-    <subImage1Confirm/>
-    <subImage2Confirm/>
-    <subImage3Confirm/>
-    <subImage4Confirm/>
-    <subImage5Confirm/> -->
     <br>
     <router-link to="/" tag="button">戻って修正</router-link>
     <hr>
@@ -47,14 +41,6 @@
 </template>
 
 <script>
-import mainImageConfirm from "@/components/modules/mainImageConfirm.vue";
-import subImage1Confirm from "@/components/modules/subImage1Confirm.vue";
-import subImage2Confirm from "@/components/modules/subImage2Confirm.vue";
-import subImage3Confirm from "@/components/modules/subImage3Confirm.vue";
-import subImage4Confirm from "@/components/modules/subImage4Confirm.vue";
-import subImage5Confirm from "@/components/modules/subImage5Confirm.vue";
-import mainImageThumbnail from "@/components/modules/mainImageThumbnail.vue";
-
 import { mapState } from "vuex";
 
 import "swiper/dist/css/swiper.css";
@@ -93,12 +79,6 @@ export default {
     };
   },
   components: {
-    /* mainImageConfirm,
-    subImage1Confirm,
-    subImage2Confirm,
-    subImage3Confirm,
-    subImage4Confirm,
-    subImage5Confirm, */
     swiper,
     swiperSlide
   },

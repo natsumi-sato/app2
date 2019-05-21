@@ -20,20 +20,6 @@
     <div class="form-group">
       <p>画像をドラッグアンドドロップすると順番が変わります。</p>
     </div>
-    <hr>
-    <!-- <div id="example1" class="list-group col">
-      <div
-        v-for="(item, index) in uploadedImage"
-        :class="['img-' + (index+1)]"
-        :key="index"
-        ref="dzFilePreview"
-      >
-        <img data-dz-thumbnail v-if="item" :src="item" :id=" 'image' + (index + 1)">
-        <button @click="deleteImage(index)">削除</button>
-      </div>
-    </div> -->
-    <p>{{uploadedImage}}</p>
-    <hr>
     <div action="/file-upload" class="dropzone" id="myAwesomeDropzone">
       <div id="example1" class="list-group col">
         <div
@@ -64,12 +50,6 @@ import importFlag from "@/components/modules/importFlag.vue";
 import stock from "@/components/modules/stock.vue";
 import detail from "@/components/modules/detail.vue";
 import seibun from "@/components/modules/seibun.vue";
-/* import mainImage from "@/components/modules/mainImage.vue";
-import subImage1 from "@/components/modules/subImage1.vue";
-import subImage2 from "@/components/modules/subImage2.vue";
-import subImage3 from "@/components/modules/subImage3.vue";
-import subImage4 from "@/components/modules/subImage4.vue";
-import subImage5 from "@/components/modules/subImage5.vue"; */
 import confirm from "@/components/modules/confirm.vue";
 
 import { mapState, mapGetters } from "vuex";
@@ -102,7 +82,6 @@ export default {
     confirm
   },
   computed: {
-    //...mapState("Image", ["uploadedImage"]),
     uploadedImage: {
       get() {
         return this.$store.state.Image.uploadedImage;
@@ -126,7 +105,6 @@ export default {
       }
     },
     uploadedImage1(e) {
-      console.log(e);
       this.$store.dispatch("Image/onFileChange", e);
     },
     deleteImage(index) {
@@ -137,8 +115,6 @@ export default {
     this.$store.dispatch("PropertyStore/axiosJSON");
   },
   mounted() {
-    console.log(Dropzone);
-
     let imgArray = [];
     let imgUrlArray = [];
     var self = this;
@@ -159,9 +135,9 @@ export default {
 
     Dropzone.autoDiscover = false;
     Dropzone.options.imageDropArea = {
-      paramName: "file", // The name that will be used to transfer the file
-      parallelUploads: 1, // 1度に何ファイルずつアップロードするか
-      acceptedFiles: "image/*", // 画像だけアップロードしたい場合
+      paramName: "file",
+      parallelUploads: 1,
+      acceptedFiles: "image/*",
       dictDefaultMessage: "ファイルをドラッグ&ドロップしてください(複数可)"
     };
     let dropzone = new Dropzone("div#myAwesomeDropzone", {
@@ -183,8 +159,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-/* .dropzone .dz-preview .dz-image {
-  width: fit-content !important;
-  height: fit-content !important;
-} */
 </style>
