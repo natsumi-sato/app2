@@ -93,7 +93,6 @@ export default {
   },
   methods: {
     validate: function(event) {
-      console.log(this.$el);
       var valid = false;
       try {
         valid = this.$data.sharedState.validate();
