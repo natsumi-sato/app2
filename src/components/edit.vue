@@ -25,7 +25,6 @@
         <div
           v-for="(item, index) in uploadedImage"
           :class="['img-' + (index+1)]"
-          :key="index"
           ref="dzFilePreview"
         >
           <img data-dz-thumbnail v-if="item" :src="item" :id=" 'image' + (index + 1)">
