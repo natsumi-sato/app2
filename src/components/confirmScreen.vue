@@ -33,10 +33,6 @@
     <div class="seibun">{{ seibun }}</div>
     <br>
     <router-link to="/" tag="button">戻って修正</router-link>
-    <hr>
-    {{uploadedImage}}
-    {{msg}}
-    <div :style="{ color: activeColor, backgroundImage: 'url(' + uploadedImage + ')' }">あああ</div>
   </div>
 </template>
 
