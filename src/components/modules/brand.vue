@@ -16,6 +16,7 @@
       <li>RMK</li>
       <li>ジルスチュアート</li>
     </ul>
+    {{msg}}
   </div>
 </template>
 
@@ -28,6 +29,7 @@ export default {
   data() {
     return {
       title: "ブランド",
+      msg: "",
     };
   },
   computed: {
@@ -54,7 +56,6 @@ export default {
           var brands = [];
         }
       }
-
       return brands;
     }
   },
