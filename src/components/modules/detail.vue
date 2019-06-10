@@ -1,7 +1,7 @@
 <template>
   <div class="form-group">
       <label>{{title}}</label>
-      <input class="input" v-model="detail">
+      <textarea class="input" v-model="detail"></textarea>
     </div>
 </template>
 

@@ -2,7 +2,7 @@
   <div class="comfirmWrap">
     <p>{{ msg }}</p>
 
-    <div class="wrap">
+    <div class="wrap_img">
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
         <swiper-slide v-for="(item, index) in uploadedImage" :class="['slide-' + (index+1)]" :key="index">
           <img v-if="item" :src="item" />
@@ -17,6 +17,48 @@
         </swiper-slide>
       </swiper>
     </div>
+
+    <div class="wrap_brand_cate_item">
+      <dl>
+        <dt>too cool for school</dt>
+        <dd>ハイライター・シェーディング</dd>
+      </dl>
+      <h3>アートクラス バイ ロダン シェーディング 9.5g</h3>
+    </div>
+
+    <div class="wrap_status">
+      <div class="leftBox">
+        <p class="text_price">¥2,052</p>
+        <p class="text_research_price"></p>
+      </div>
+      <div class="rightBox">
+        <ul>
+          <li>送料<br>0円</li>
+          <li>471<br>pt還元</li>
+          <li>正規品</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wrap_stock">
+      <p class="text_stock">在庫あり</p>
+    </div>
+
+    <div class="wrap_accordion">
+      <div class="box_accordion">
+        <h4>商品詳細</h4>
+        <p>うおおおおおおおお<br>商品詳細だよおおおおおおおお<br>うおおおおおおおお</p>
+      </div>
+      <div class="box_accordion">
+        <h4>成分</h4>
+        <p>うおおおおおおおお<br>成分だよおおおおおお<br>うおおおおおおおお</p>
+      </div>
+      <!--<div class="box_accordion">
+        <h4>レビュー</h4>
+        <p>うおおおおおおおお<br>レビューだよおおおおおお<br>うおおおおおおおお</p>
+      </div>-->
+    </div>
+    
 
     <hr>
     <div class="itemName">{{ itemName }}</div>
@@ -109,10 +151,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .comfirmWrap {
+  width: 500px;
+  margin:0 auto;
   img {
     max-width: 100px;
   }
-  .wrap {
+  .wrap_img {
     width: 500px;
     .swiper-container {
       width: 100%;
