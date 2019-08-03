@@ -184,7 +184,6 @@ body {
     max-width: 100px;
   }
   .wrap_img {
-    width: 500px;
     margin: 15px auto;
     .swiper-container {
       width: 100%;
@@ -198,8 +197,6 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 300px;
-        height: 300px;
       }
       .swiper-button-prev,
       .swiper-button-next {
@@ -222,7 +219,8 @@ body {
         .swiper-slide {
           color: blue;
           img {
-            max-width: 500px;
+            max-width: 300px;
+            max-height: 300px
           }
         }
       }
