@@ -29,49 +29,81 @@
 
     <div class="wrap_brand_cate_item">
       <dl>
-        <dt><a href="" class="belongs-to">too cool for school</a></dt>
+        <dt>
+          <a href class="belongs-to">too cool for school</a>
+        </dt>
         <div>/</div>
-        <dd><a href="" class="belongs-to">ハイライター・シェーディング</a></dd>
+        <dd>
+          <a href class="belongs-to">ハイライター・シェーディング</a>
+        </dd>
       </dl>
       <h3>アートクラス バイ ロダン シェーディング 9.5g</h3>
     </div>
 
     <div class="wrap_status">
       <div class="priceBox">
-        <p class="text_price">¥2,052<span>(税込)</span></p>
-        <p class="text_research_price"><span>調査価格</span>¥1,908<span>(税込)</span></p>
+        <p class="text_price">
+          ¥2,052
+          <span>(税込)</span>
+        </p>
+        <p class="text_research_price">
+          <span>調査価格</span>¥1,908
+          <span>(税込)</span>
+        </p>
         <p class="text_stock">残り3個</p>
       </div>
       <div class="statusBox">
         <ul>
-          <li>送料0円 </li>
+          <li>送料0円</li>
           <li>471pt還元</li>
           <li>正規品</li>
         </ul>
       </div>
     </div>
 
-    <div class="wrap_accordion">
-      <div class="box_accordion">
-        <h4>商品詳細</h4>
-        <p>
-          うおおおおおおおお
-          <br />商品詳細だよおおおおおおおお
-          <br />うおおおおおおおお
-        </p>
+     <div class="wrap_accordion">
+      <div class="box_accordion" @click="accordionToggle('detail')">
+        <h4>
+          商品詳細
+          <span class="arrow-link" :class="{ 'opened': isOpened }"></span>
+        </h4>
+        <transition
+          name="js-accordion"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @before-leave="beforeLeave"
+          @leave="leave"
+        >
+          <div class="js-accordion--target" v-show="isOpened">
+            <p class="js-accordion--body">
+              商品詳細テキスト
+              <br />テキスト
+              <br />テキスト
+            </p>
+          </div>
+        </transition>
       </div>
-      <div class="box_accordion">
-        <h4>成分</h4>
-        <p>
-          うおおおおおおおお
-          <br />成分だよおおおおおお
-          <br />うおおおおおおおお
-        </p>
+      <div class="box_accordion" @click="accordionToggle('seibun')">
+        <h4>
+          成分
+          <span class="arrow-link" :class="{ 'opened': isOpened }"></span>
+        </h4>
+        <transition
+          name="js-accordion"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @before-leave="beforeLeave"
+          @leave="leave"
+        >
+          <div class="js-accordion--target" v-show="isOpened">
+            <p class="js-accordion--body">
+              成分テキスト
+              <br />テキスト
+              <br />テキスト
+            </p>
+          </div>
+        </transition>
       </div>
-      <!--<div class="box_accordion">
-        <h4>レビュー</h4>
-        <p>うおおおおおおおお<br>レビューだよおおおおおお<br>うおおおおおおおお</p>
-      </div>-->
     </div>
 
     <hr />
@@ -126,7 +158,8 @@ export default {
       activeColor: "pink",
       msg: "テストだよん",
       delayTime: 100,
-      uploadedImageURL: "ふふふ"
+      uploadedImageURL: "ふふふ",
+      isOpened: false,
     };
   },
   components: {
@@ -157,6 +190,24 @@ export default {
       swiperTop.controller.control = swiperThumbs;
       swiperThumbs.controller.control = swiperTop;
     });
+  },
+  methods: {
+    accordionToggle: function(el) {
+      console.log(el);
+      this.isOpened = !this.isOpened;
+    },
+    beforeEnter: function(el) {
+      el.style.height = "0";
+    },
+    enter: function(el) {
+      el.style.height = el.scrollHeight + "px";
+    },
+    beforeLeave: function(el) {
+      el.style.height = el.scrollHeight + "px";
+    },
+    leave: function(el) {
+      el.style.height = "0";
+    }
   }
 };
 </script>
@@ -215,12 +266,12 @@ body {
         }
       }
       &.gallery-top {
-          width: 430px;
+        width: 430px;
         .swiper-slide {
           color: blue;
           img {
             max-width: 300px;
-            max-height: 300px
+            max-height: 300px;
           }
         }
       }
@@ -245,7 +296,7 @@ body {
     dl {
       height: 32px;
       display: flex;
-      justify-content: left; 
+      justify-content: left;
       div {
         font-size: 12px;
         color: $color-main;
@@ -266,14 +317,14 @@ body {
         font-size: 2rem;
         line-height: 2.8rem;
         span {
-          font-size: .6rem;
+          font-size: 0.6rem;
           margin-left: 3px;
         }
       }
       .text_research_price {
         font-size: 1rem;
         span {
-          font-size: .6rem;
+          font-size: 0.6rem;
           &:first-of-type {
             margin-right: 3px;
           }
@@ -284,7 +335,7 @@ body {
       }
       .text_stock {
         line-height: 1.6em;
-        font-size: .8em;
+        font-size: 0.8em;
       }
     }
     .statusBox {
@@ -297,11 +348,43 @@ body {
           color: #fff;
           padding: 3px;
           line-height: 1.2em;
-          font-size: .8em;
+          font-size: 0.8em;
           margin-right: 6px;
         }
       }
     }
   }
+  .wrap_accordion {
+    .box_accordion {
+      h4 {
+        position: relative;
+        .arrow-link {
+          width: 15px;
+          height: 15px;
+          background-size: contain;
+          position: absolute;
+          top: 50%;
+          right: 1rem;
+          margin-top: -5px;
+          transition: 0.3s;
+          display: block;
+          border-top: 1px solid rgb(145, 145, 145);
+          border-left: 1px solid rgb(145, 145, 145);
+          transform: rotate(225deg) skew(8deg, 8deg);
+          &.opened {
+            transform: rotate(45deg);
+          }
+        }
+      }
+      .js-accordion {
+        &--target {
+          overflow: hidden;
+          transition: height 0.4s ease-in-out;
+        }
+      }
+    }
+  }
 }
+
+
 </style>
