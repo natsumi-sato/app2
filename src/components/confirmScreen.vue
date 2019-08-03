@@ -103,7 +103,6 @@ export default {
   data() {
     return {
       swiperOptionTop: {
-        spaceBetween: 10,
         loop: false,
         loopedSlides: 5, //looped slides should be the same
         navigation: {
@@ -216,6 +215,7 @@ body {
         }
       }
       &.gallery-top {
+          width: 430px;
         .swiper-slide {
           color: blue;
           img {
