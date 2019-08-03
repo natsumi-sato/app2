@@ -29,34 +29,26 @@
 
     <div class="wrap_brand_cate_item">
       <dl>
-        <dt>too cool for school</dt>
-        <dd>ハイライター・シェーディング</dd>
+        <dt><a href="" class="belongs-to">too cool for school</a></dt>
+        <div>/</div>
+        <dd><a href="" class="belongs-to">ハイライター・シェーディング</a></dd>
       </dl>
       <h3>アートクラス バイ ロダン シェーディング 9.5g</h3>
     </div>
 
     <div class="wrap_status">
-      <div class="leftBox">
-        <p class="text_price">¥2,052</p>
-        <p class="text_research_price"></p>
+      <div class="priceBox">
+        <p class="text_price">¥2,052<span>(税込)</span></p>
+        <p class="text_research_price"><span>調査価格</span>¥1,908<span>(税込)</span></p>
+        <p class="text_stock">残り3個</p>
       </div>
-      <div class="rightBox">
+      <div class="statusBox">
         <ul>
-          <li>
-            送料
-            <br />0円
-          </li>
-          <li>
-            471
-            <br />pt還元
-          </li>
+          <li>送料0円 </li>
+          <li>471pt還元</li>
           <li>正規品</li>
         </ul>
       </div>
-    </div>
-
-    <div class="wrap_stock">
-      <p class="text_stock">在庫あり</p>
     </div>
 
     <div class="wrap_accordion">
@@ -172,17 +164,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+$fontSize-main: 16px;
 $color-main: #111010;
+$belongs-t: #43b1fc;
+$text_price: #fb2e63;
 
+body {
+  font-size: $fontSize-main;
+}
+
+.belongs-to {
+  color: $belongs-t;
+}
 
 .comfirmWrap {
-  width: 500px;
+  width: 570px;
   margin: 0 auto;
   img {
     max-width: 100px;
   }
   .wrap_img {
     width: 500px;
+    margin: 15px auto;
     .swiper-container {
       width: 100%;
       height: 100%;
@@ -231,12 +234,73 @@ $color-main: #111010;
           color: blue;
           width: 100px !important;
           height: 100px !important;
-          border: 1px solid rgba(0,0,0,.25);
+          border: 1px solid rgba(0, 0, 0, 0.25);
           margin: 5px;
           overflow: hidden;
           img {
-            
           }
+        }
+      }
+    }
+  }
+  .wrap_brand_cate_item {
+    dl {
+      height: 32px;
+      display: flex;
+      justify-content: left; 
+      div {
+        font-size: 12px;
+        color: $color-main;
+        margin: 0 5px;
+        padding-top: 1px;
+      }
+    }
+    h3 {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      font-weight: 400;
+    }
+  }
+  .wrap_status {
+    .priceBox {
+      .text_price {
+        color: $text_price;
+        font-size: 2rem;
+        line-height: 2.8rem;
+        span {
+          font-size: .6rem;
+          margin-left: 3px;
+        }
+      }
+      .text_research_price {
+        font-size: 1rem;
+        span {
+          font-size: .6rem;
+          &:first-of-type {
+            margin-right: 3px;
+          }
+          &:last-of-type {
+            margin-left: 3px;
+          }
+        }
+      }
+      .text_stock {
+        line-height: 1.6em;
+        font-size: .8em;
+      }
+    }
+    .statusBox {
+      ul {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        li {
+          background: #111010;
+          color: #fff;
+          padding: 3px;
+          line-height: 1.2em;
+          font-size: .8em;
+          margin-right: 6px;
         }
       }
     }
