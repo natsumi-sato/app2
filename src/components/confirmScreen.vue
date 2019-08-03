@@ -4,7 +4,11 @@
 
     <div class="wrap_img">
       <swiper :options="swiperOptionTop" class="gallery-top" ref="swiperTop">
-        <swiper-slide v-for="(item, index) in uploadedImage" :class="['slide-' + (index+1)]" :key="index">
+        <swiper-slide
+          v-for="(item, index) in uploadedImage"
+          :class="['slide-' + (index+1)]"
+          :key="index"
+        >
           <img v-if="item" :src="item" />
         </swiper-slide>
         <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
@@ -12,7 +16,12 @@
       </swiper>
       <!-- swiper2 Thumbs -->
       <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
-        <swiper-slide class="slide-1" v-for="(item, index) in uploadedImage" :class="['slide-' + (index+1)]" :key="index">
+        <swiper-slide
+          class="slide-1"
+          v-for="(item, index) in uploadedImage"
+          :class="['slide-' + (index+1)]"
+          :key="index"
+        >
           <img v-if="item" :src="item" />
         </swiper-slide>
       </swiper>
@@ -33,8 +42,14 @@
       </div>
       <div class="rightBox">
         <ul>
-          <li>送料<br>0円</li>
-          <li>471<br>pt還元</li>
+          <li>
+            送料
+            <br />0円
+          </li>
+          <li>
+            471
+            <br />pt還元
+          </li>
           <li>正規品</li>
         </ul>
       </div>
@@ -47,20 +62,27 @@
     <div class="wrap_accordion">
       <div class="box_accordion">
         <h4>商品詳細</h4>
-        <p>うおおおおおおおお<br>商品詳細だよおおおおおおおお<br>うおおおおおおおお</p>
+        <p>
+          うおおおおおおおお
+          <br />商品詳細だよおおおおおおおお
+          <br />うおおおおおおおお
+        </p>
       </div>
       <div class="box_accordion">
         <h4>成分</h4>
-        <p>うおおおおおおおお<br>成分だよおおおおおお<br>うおおおおおおおお</p>
+        <p>
+          うおおおおおおおお
+          <br />成分だよおおおおおお
+          <br />うおおおおおおおお
+        </p>
       </div>
       <!--<div class="box_accordion">
         <h4>レビュー</h4>
         <p>うおおおおおおおお<br>レビューだよおおおおおお<br>うおおおおおおおお</p>
       </div>-->
     </div>
-    
 
-    <hr>
+    <hr />
     <div class="itemName">{{ itemName }}</div>
     <div class="listPrice">{{ listPrice }}</div>
     <div class="sellPrice">{{ sellPrice }}</div>
@@ -73,14 +95,14 @@
     <div class="stock">{{ stock }}</div>
     <div class="detail">{{ detail }}</div>
     <div class="seibun">{{ seibun }}</div>
-    <br>
+    <br />
     <router-link to="/" tag="button">戻って修正</router-link>
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-
+import "reset-css/reset.css";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 
@@ -96,7 +118,7 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         },
-        effect: "fade"
+        effect: "slide"
       },
       swiperOptionThumbs: {
         spaceBetween: 10,
@@ -108,7 +130,7 @@ export default {
         slideToClickedSlide: true,
         autoplayDisableOnInteraction: false,
         centeredSlides: true,
-        virtualTranslate: true,
+        virtualTranslate: true
       },
       activeColor: "pink",
       msg: "テストだよん",
@@ -150,9 +172,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+$color-main: #111010;
+
+
 .comfirmWrap {
   width: 500px;
-  margin:0 auto;
+  margin: 0 auto;
   img {
     max-width: 100px;
   }
@@ -170,6 +195,25 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 300px;
+        height: 300px;
+      }
+      .swiper-button-prev,
+      .swiper-button-next {
+        background-image: none;
+        font-size: 11px;
+      }
+      .swiper-button-prev {
+        &::before {
+          content: "〈";
+          color: #000;
+        }
+      }
+      .swiper-button-next {
+        &::before {
+          content: "〉";
+          color: #000;
+        }
       }
       &.gallery-top {
         .swiper-slide {
@@ -185,9 +229,13 @@ export default {
         box-sizing: border-box;
         .swiper-slide {
           color: blue;
-          height: 100px;
+          width: 100px !important;
+          height: 100px !important;
+          border: 1px solid rgba(0,0,0,.25);
+          margin: 5px;
+          overflow: hidden;
           img {
-            max-width: 150px;
+            
           }
         }
       }
