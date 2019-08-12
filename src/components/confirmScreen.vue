@@ -61,7 +61,7 @@
       </div>
     </div>
 
-     <div class="wrap_accordion">
+    <div class="wrap_accordion">
       <div class="box_accordion" @click="accordionToggle('detail')">
         <h4>
           商品詳細
@@ -107,6 +107,30 @@
     </div>
 
     <hr />
+    <js-accordion>
+      <div slot="title">アコーディオン1</div>
+      <div class="js-accordion--body" slot="body">
+        <p>アコーディオン1の中身</p>
+        <p>アコーディオン1の中身</p>
+        <p>アコーディオン1の中身</p>
+      </div>
+    </js-accordion>
+    <js-accordion>
+      <div slot="title">アコーディオン2</div>
+      <div class="js-accordion--body" slot="body">
+        <p>アコーディオン2の中身</p>
+        <p>アコーディオン2の中身</p>
+      </div>
+    </js-accordion>
+    <js-accordion>
+      <div slot="title">アコーディオン3</div>
+      <div class="js-accordion--body" slot="body">
+        <p>アコーディオン3の中身</p>
+        <p>アコーディオン3の中身</p>
+      </div>
+    </js-accordion>
+
+    <hr />
     <div class="itemName">{{ itemName }}</div>
     <div class="listPrice">{{ listPrice }}</div>
     <div class="sellPrice">{{ sellPrice }}</div>
@@ -129,6 +153,7 @@ import { mapState } from "vuex";
 import "reset-css/reset.css";
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import jsAccordion from "@/components/slot/jsAccordion.vue";
 
 export default {
   name: "confirmScreen",
@@ -159,13 +184,15 @@ export default {
       msg: "テストだよん",
       delayTime: 100,
       uploadedImageURL: "ふふふ",
-      isOpened: false,
+      isOpened: false
     };
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    jsAccordion
   },
+  template: "<js-accordion>",
   computed: {
     ...mapState("PropertyStore", [
       "itemName",
@@ -385,6 +412,4 @@ body {
     }
   }
 }
-
-
 </style>
