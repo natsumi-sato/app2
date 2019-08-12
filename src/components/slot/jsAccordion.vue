@@ -24,7 +24,6 @@
 
 <script>
 export default {
-//  name: "jsAccordion",
   data() {
     return {
       isOpened: false
@@ -50,3 +49,29 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+/*jsアコーディオン*/
+.js-accordion {
+  &--trigger {
+    font-size: 1rem;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    transition: all 0.2s ease-in;
+    text-align: left;
+    outline: none;
+    border: none;
+    cursor: pointer;
+  }
+  &--target {
+    overflow: hidden;
+    transition: height 0.4s ease-in-out;
+  }
+  &--body {
+    padding: 0;
+  }
+}
+
+</style>

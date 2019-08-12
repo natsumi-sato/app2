@@ -62,48 +62,18 @@
     </div>
 
     <div class="wrap_accordion">
-      <div class="box_accordion" @click="accordionToggle('detail')">
-        <h4>
+      <js-accordion>
+        <h4 slot="title">
           商品詳細
           <span class="arrow-link" :class="{ 'opened': isOpened }"></span>
         </h4>
-        <transition
-          name="js-accordion"
-          @before-enter="beforeEnter"
-          @enter="enter"
-          @before-leave="beforeLeave"
-          @leave="leave"
-        >
-          <div class="js-accordion--target" v-show="isOpened">
-            <p class="js-accordion--body">
-              商品詳細テキスト
-              <br />テキスト
-              <br />テキスト
-            </p>
-          </div>
-        </transition>
-      </div>
-      <div class="box_accordion" @click="accordionToggle('seibun')">
-        <h4>
-          成分
-          <span class="arrow-link" :class="{ 'opened': isOpened }"></span>
-        </h4>
-        <transition
-          name="js-accordion"
-          @before-enter="beforeEnter"
-          @enter="enter"
-          @before-leave="beforeLeave"
-          @leave="leave"
-        >
-          <div class="js-accordion--target" v-show="isOpened">
-            <p class="js-accordion--body">
-              成分テキスト
-              <br />テキスト
-              <br />テキスト
-            </p>
-          </div>
-        </transition>
-      </div>
+        <div class="js-accordion--body" slot="body">
+          <p>商品詳細の中身</p>
+          <p>商品詳細の中身</p>
+          <p>商品詳細の中身</p>
+        </div>
+      </js-accordion>
+      
     </div>
 
     <hr />
@@ -183,8 +153,7 @@ export default {
       activeColor: "pink",
       msg: "テストだよん",
       delayTime: 100,
-      uploadedImageURL: "ふふふ",
-      isOpened: false
+      uploadedImageURL: "ふふふ"
     };
   },
   components: {
@@ -218,24 +187,7 @@ export default {
       swiperThumbs.controller.control = swiperTop;
     });
   },
-  methods: {
-    accordionToggle: function(el) {
-      console.log(el);
-      this.isOpened = !this.isOpened;
-    },
-    beforeEnter: function(el) {
-      el.style.height = "0";
-    },
-    enter: function(el) {
-      el.style.height = el.scrollHeight + "px";
-    },
-    beforeLeave: function(el) {
-      el.style.height = el.scrollHeight + "px";
-    },
-    leave: function(el) {
-      el.style.height = "0";
-    }
-  }
+  methods: {}
 };
 </script>
 
@@ -382,31 +334,37 @@ body {
     }
   }
   .wrap_accordion {
-    .box_accordion {
-      h4 {
-        position: relative;
-        .arrow-link {
-          width: 15px;
-          height: 15px;
-          background-size: contain;
-          position: absolute;
-          top: 50%;
-          right: 1rem;
-          margin-top: -5px;
-          transition: 0.3s;
-          display: block;
-          border-top: 1px solid rgb(145, 145, 145);
-          border-left: 1px solid rgb(145, 145, 145);
-          transform: rotate(225deg) skew(8deg, 8deg);
-          &.opened {
-            transform: rotate(45deg);
+    .js-accordion {
+      &--trigger {
+        h4 {
+          position: relative;
+          .arrow-link {
+            width: 15px;
+            height: 15px;
+            background-size: contain;
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            margin-top: -5px;
+            transition: 0.3s;
+            display: block;
+            border-top: 1px solid rgb(145, 145, 145);
+            border-left: 1px solid rgb(145, 145, 145);
+            transform: rotate(225deg) skew(8deg, 8deg);
+          }
+        }
+        &._state-open {
+          h4 {
+            .arrow-link {
+              transform: rotate(45deg);
+            }
           }
         }
       }
-      .js-accordion {
-        &--target {
-          overflow: hidden;
-          transition: height 0.4s ease-in-out;
+      &--body {
+        p {
+          font-size: 0.85rem;
+          line-height: 1.6em;
         }
       }
     }
