@@ -66,6 +66,7 @@ export default {
     cursor: pointer;
   }
   &--target {
+    padding-bottom: 10px;
     overflow: hidden;
     transition: height 0.4s ease-in-out;
   }

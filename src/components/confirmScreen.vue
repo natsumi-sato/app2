@@ -43,12 +43,12 @@
     <div class="wrap_status">
       <div class="priceBox">
         <p class="text_price">
-          ¥2,052
-          <span>(税込)</span>
+          <span class="price_number">¥2,052</span>
+          <span class="tax">(税込)</span>
         </p>
         <p class="text_research_price">
-          <span>調査価格</span>¥1,908
-          <span>(税込)</span>
+          <span class="research_text">調査価格</span><span class="research_price">¥1,908</span>
+          <span class="research_tax">(税込)</span>
         </p>
         <p class="text_stock">残り3個</p>
       </div>
@@ -73,32 +73,29 @@
           <p>商品詳細の中身</p>
         </div>
       </js-accordion>
-      
+      <js-accordion>
+        <h4 slot="title">
+          成分
+          <span class="arrow-link" :class="{ 'opened': isOpened }"></span>
+        </h4>
+        <div class="js-accordion--body" slot="body">
+          <p>成分の中身</p>
+          <p>成分の中身</p>
+          <p>成分の中身</p>
+        </div>
+      </js-accordion>
+      <js-accordion>
+        <h4 slot="title">
+          レビュー
+          <span class="arrow-link" :class="{ 'opened': isOpened }"></span>
+        </h4>
+        <div class="js-accordion--body" slot="body">
+          <p>レビューの中身</p>
+          <p>レビューの中身</p>
+          <p>レビューの中身</p>
+        </div>
+      </js-accordion>
     </div>
-
-    <hr />
-    <js-accordion>
-      <div slot="title">アコーディオン1</div>
-      <div class="js-accordion--body" slot="body">
-        <p>アコーディオン1の中身</p>
-        <p>アコーディオン1の中身</p>
-        <p>アコーディオン1の中身</p>
-      </div>
-    </js-accordion>
-    <js-accordion>
-      <div slot="title">アコーディオン2</div>
-      <div class="js-accordion--body" slot="body">
-        <p>アコーディオン2の中身</p>
-        <p>アコーディオン2の中身</p>
-      </div>
-    </js-accordion>
-    <js-accordion>
-      <div slot="title">アコーディオン3</div>
-      <div class="js-accordion--body" slot="body">
-        <p>アコーディオン3の中身</p>
-        <p>アコーディオン3の中身</p>
-      </div>
-    </js-accordion>
 
     <hr />
     <div class="itemName">{{ itemName }}</div>
@@ -293,23 +290,25 @@ body {
     .priceBox {
       .text_price {
         color: $text_price;
-        font-size: 2rem;
-        line-height: 2.8rem;
-        span {
-          font-size: 0.6rem;
-          margin-left: 3px;
+        .price_number {
+          font-size: 2rem;
+          line-height: 2.8rem;
+          padding-top: 3px;
         }
+        .tax {
+            font-size: 0.6rem;
+          }
       }
       .text_research_price {
-        font-size: 1rem;
-        span {
+        .research_price {
+          font-size: 1rem;
+        }
+        .research_text {
           font-size: 0.6rem;
-          &:first-of-type {
-            margin-right: 3px;
-          }
-          &:last-of-type {
-            margin-left: 3px;
-          }
+          margin-right: 3px;
+        }
+        .research_tax {
+          font-size: 0.6rem;
         }
       }
       .text_stock {
@@ -319,6 +318,7 @@ body {
     }
     .statusBox {
       ul {
+        margin-top: 5px;
         display: flex;
         justify-content: left;
         align-items: center;
@@ -334,16 +334,21 @@ body {
     }
   }
   .wrap_accordion {
+    margin-top: 20px;
     .js-accordion {
+      border-bottom: 1px solid rgba(0,0,0,.25);
+      &:first-child {
+        border-top: 1px solid rgba(0,0,0,.25);
+      }
       &--trigger {
         h4 {
           position: relative;
           .arrow-link {
-            width: 15px;
-            height: 15px;
+            width: 12px;
+            height: 12px;
             background-size: contain;
             position: absolute;
-            top: 50%;
+            top: 22%;
             right: 1rem;
             margin-top: -5px;
             transition: 0.3s;
@@ -357,6 +362,7 @@ body {
           h4 {
             .arrow-link {
               transform: rotate(45deg);
+              transform-origin: 0 70%;
             }
           }
         }
