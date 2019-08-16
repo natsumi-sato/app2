@@ -24,39 +24,41 @@
         >
           <img v-if="item" :src="item" />
         </swiper-slide>
+        <div class="swiper-scrollbar" slot="scrollbar"></div>
       </swiper>
     </div>
 
     <div class="wrap_brand_cate_item">
       <dl>
         <dt>
-          <a href class="belongs-to">too cool for school</a>
+          <a href class="belongs-to">{{ brand }}</a>
         </dt>
         <div>/</div>
         <dd>
-          <a href class="belongs-to">ハイライター・シェーディング</a>
+          <a href class="belongs-to">{{ category }}</a>
         </dd>
       </dl>
-      <h3>アートクラス バイ ロダン シェーディング 9.5g</h3>
+      <h3>{{ itemName }} {{ color }}</h3>
     </div>
 
     <div class="wrap_status">
       <div class="priceBox">
         <p class="text_price">
-          <span class="price_number">¥2,052</span>
+          <span class="price_number">¥{{ sellPrice }}</span>
           <span class="tax">(税込)</span>
         </p>
         <p class="text_research_price">
-          <span class="research_text">調査価格</span><span class="research_price">¥1,908</span>
+          <span class="research_text">調査価格</span>
+          <span class="research_price">¥{{ listPrice }}</span>
           <span class="research_tax">(税込)</span>
         </p>
-        <p class="text_stock">残り3個</p>
+        <p class="text_stock">{{ stock }}</p>
       </div>
       <div class="statusBox">
         <ul>
-          <li>送料0円</li>
-          <li>471pt還元</li>
-          <li>正規品</li>
+          <li v-if="postage">{{ postage }}</li>
+          <li v-if="point">{{ point }}pt還元</li>
+          <li v-if="importFlag">{{ importFlag }}</li>
         </ul>
       </div>
     </div>
@@ -68,9 +70,7 @@
           <span class="arrow-link" :class="{ 'opened': isOpened }"></span>
         </h4>
         <div class="js-accordion--body" slot="body">
-          <p>商品詳細の中身</p>
-          <p>商品詳細の中身</p>
-          <p>商品詳細の中身</p>
+          <p>{{ detail }}</p>
         </div>
       </js-accordion>
       <js-accordion>
@@ -79,9 +79,7 @@
           <span class="arrow-link" :class="{ 'opened': isOpened }"></span>
         </h4>
         <div class="js-accordion--body" slot="body">
-          <p>成分の中身</p>
-          <p>成分の中身</p>
-          <p>成分の中身</p>
+          <p>{{ seibun }}</p>
         </div>
       </js-accordion>
       <js-accordion>
@@ -128,7 +126,7 @@ export default {
     return {
       swiperOptionTop: {
         loop: false,
-        loopedSlides: 5, //looped slides should be the same
+        //loopedSlides: 5, //looped slides should be the same
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
@@ -136,16 +134,22 @@ export default {
         effect: "slide"
       },
       swiperOptionThumbs: {
-        spaceBetween: 10,
+        //spaceBetween: 10,
         freeMode: true,
-        slidesPerView: 6,
-        touchRatio: 0.2,
+        slidesPerView: 5,
+        touchRatio: 1,
+        touchAngle: 45,
         loop: false,
-        loopedSlides: 5, //looped slides should be the same
+        //loopedSlides: 5, //looped slides should be the same
         slideToClickedSlide: true,
         autoplayDisableOnInteraction: false,
         centeredSlides: true,
-        virtualTranslate: true
+        virtualTranslate: false,
+        slidesOffsetBefore: -220,
+        scrollbar: {
+          el: ".swiper-scrollbar",
+          hide: true
+        }
       },
       activeColor: "pink",
       msg: "テストだよん",
@@ -183,8 +187,7 @@ export default {
       swiperTop.controller.control = swiperThumbs;
       swiperThumbs.controller.control = swiperTop;
     });
-  },
-  methods: {}
+  }
 };
 </script>
 
@@ -206,9 +209,6 @@ body {
 .comfirmWrap {
   width: 570px;
   margin: 0 auto;
-  img {
-    max-width: 100px;
-  }
   .wrap_img {
     margin: 15px auto;
     .swiper-container {
@@ -243,6 +243,7 @@ body {
       }
       &.gallery-top {
         width: 430px;
+        margin-bottom: 15px;
         .swiper-slide {
           color: blue;
           img {
@@ -255,14 +256,20 @@ body {
         height: 20%;
         margin: auto;
         box-sizing: border-box;
-        .swiper-slide {
-          color: blue;
-          width: 100px !important;
-          height: 100px !important;
-          border: 1px solid rgba(0, 0, 0, 0.25);
-          margin: 5px;
-          overflow: hidden;
-          img {
+        .swiper-wrapper {
+          .swiper-slide {
+            color: blue;
+            width: 100px !important;
+            height: 100px !important;
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            margin: 5px;
+            overflow: hidden;
+            img {
+              max-width: 100px;
+            }
+            &.swiper-slide-active {
+              filter: brightness(60%);
+            }
           }
         }
       }
@@ -296,8 +303,8 @@ body {
           padding-top: 3px;
         }
         .tax {
-            font-size: 0.6rem;
-          }
+          font-size: 0.6rem;
+        }
       }
       .text_research_price {
         .research_price {
@@ -336,9 +343,9 @@ body {
   .wrap_accordion {
     margin-top: 20px;
     .js-accordion {
-      border-bottom: 1px solid rgba(0,0,0,.25);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
       &:first-child {
-        border-top: 1px solid rgba(0,0,0,.25);
+        border-top: 1px solid rgba(0, 0, 0, 0.25);
       }
       &--trigger {
         h4 {
@@ -371,6 +378,7 @@ body {
         p {
           font-size: 0.85rem;
           line-height: 1.6em;
+          white-space: pre;
         }
       }
     }
